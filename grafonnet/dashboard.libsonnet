@@ -16,6 +16,7 @@ local timepickerlib = import 'timepicker.libsonnet';
     schemaVersion=14,
     uid='',
     description=null,
+    version=null,
   ):: {
     local it = self,
     _annotations:: [],
@@ -44,7 +45,7 @@ local timepickerlib = import 'timepicker.libsonnet';
     timezone: timezone,
     timepicker: timepicker,
     title: title,
-    version: 0,
+    version: version,
     addAnnotation(annotation):: self {
       _annotations+:: [annotation],
     },

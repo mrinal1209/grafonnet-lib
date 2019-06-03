@@ -89,11 +89,15 @@
     logBase1Y=1,
     logBase2Y=1,
     transparent=false,
-    value_type='individual'
+    value_type='individual',
+    msResolution=false,
+    editable=null,
   ):: {
     title: title,
     [if span != null then 'span']: span,
     [if min_span != null then 'minSpan']: min_span,
+    [if decimals != null then 'decimals']: decimals,
+    [if editable != null then 'editable']: editable,
     type: 'graph',
     datasource: datasource,
     targets: [
@@ -102,8 +106,8 @@
     [if height != null then 'height']: height,
     renderer: 'flot',
     yaxes: [
-      self.yaxe(if formatY1 != null then formatY1 else format, min, max, decimals=decimals, logBase=logBase1Y),
-      self.yaxe(if formatY2 != null then formatY2 else format, min, max, decimals=decimals, logBase=logBase2Y),
+      self.yaxe(if formatY1 != null then formatY1 else format, min, max, logBase=logBase1Y),
+      self.yaxe(if formatY2 != null then formatY2 else format, min, max,logBase=logBase2Y),
     ],
     xaxis: {
       show: show_xaxis,
@@ -111,6 +115,10 @@
       name: null,
       values: if x_axis_mode == 'series' then [x_axis_values] else [],
       buckets: null,
+    },
+    yaxis: {
+      align:false,
+      alignLevel:null,
     },
     lines: lines,
     fill: fill,
@@ -141,6 +149,7 @@
     nullPointMode: nullPointMode,
     steppedLine: false,
     tooltip: {
+      msResolution:msResolution,
       value_type: value_type,
       shared: true,
       sort: if sort == 'decreasing' then 2 else if sort == 'increasing' then 1 else sort,

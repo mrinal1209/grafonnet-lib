@@ -8,6 +8,8 @@
     interval=null,
     instant=null,
     refId=null,
+    calculatedInterval=null,
+    step=null,
   ):: {
     [if datasource != null then 'datasource']: datasource,
     expr: expr,
@@ -17,5 +19,7 @@
     [if interval != null then 'interval']: interval,
     [if instant != null then 'instant']: instant,
     [if legendFormat != null then 'legendFormat']: legendFormat,
+    [if calculatedInterval != null then 'calculatedInterval']: calculatedInterval,
+    [if step != null then 'step']: step,
   },
 }

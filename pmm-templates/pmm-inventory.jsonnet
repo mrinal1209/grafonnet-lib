@@ -121,5 +121,5 @@ dashboard.new(
     y: 0,
     w: 24,
     h: 17,
-  }
+  },style=null,
 )

@@ -17,4 +17,5 @@
   cloudwatch:: import 'cloudwatch.libsonnet',
   elasticsearch:: import 'elasticsearch.libsonnet',
   pmm:: import 'pmm-generic.libsonnet',
+  pmmSinglestat:: import 'pmm-singlestat.libsonnet',
 }

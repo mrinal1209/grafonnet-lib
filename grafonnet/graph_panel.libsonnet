@@ -96,6 +96,7 @@
     maxPerRow=null,
     repeatIteration=null,
     repeatPanelId=null,
+    shared_tooltip=true,
   ):: {
     title: title,
     [if maxPerRow != null then 'maxPerRow']: maxPerRow,
@@ -159,7 +160,7 @@
     tooltip: {
       msResolution:msResolution,
       value_type: value_type,
-      shared: true,
+      shared: shared_tooltip,
       sort: if sort == 'decreasing' then 2 else if sort == 'increasing' then 1 else sort,
     },
     timeFrom: null,

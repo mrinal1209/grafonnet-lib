@@ -17,8 +17,11 @@
     refresh_on_load=null,
     allFormat=null,
     multiFormat=null,
+    definition=null,
+    skipUrlSync=null,
   )::
     {
+      [if skipUrlSync != null then 'skipUrlSync']: skipUrlSync,
       allValue: allValues,
       current: $.current(current),
       datasource: datasource,
@@ -40,6 +43,7 @@
       [if refresh_on_load != null then 'refresh_on_load']: refresh_on_load,
       [if allFormat != null then 'allFormat']: allFormat,
       [if multiFormat != null then 'multiFormat']: multiFormat,
+      [if definition != null then 'definition']: definition,
     },
   interval(
     name,
@@ -56,6 +60,7 @@
     allFormat=null,
     auto=false,
     valuelabels={},
+    skipUrlSync=null,
   )::
     {
       hide: $.hide(hide),
@@ -66,6 +71,7 @@
       refresh: 2,
       type: 'interval',
       //[if auto != false then 'auto']: auto,
+      [if skipUrlSync != null then 'skipUrlSync']: skipUrlSync,
       auto: std.count(std.split(query, ','), 'auto') > 0,
       auto_count: auto_count,
       auto_min: auto_min,

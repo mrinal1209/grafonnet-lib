@@ -150,19 +150,22 @@ dashboard.new(
   template.new(
   'host',
   'Prometheus',
-  'label_values({__name__=~"node_cpu|node_cpu_average", job!="prometheus"}, instance)',
+  'label_values(node_boot_time_seconds, node_name)',
   label='Host',
+  current='Node-1.us',
   refresh='load',
   sort=1,
   allFormat='pipe',
   multiFormat='pipe',
+  definition='label_values(node_boot_time_seconds, node_name)',
+  skipUrlSync=false,
   ),
 )
 .addTemplate(
   template.new(
   'cpu',
   'Prometheus',
-  'label_values(node_cpu{instance="$host"}, cpu)',
+  'label_values(node_cpu_seconds_total{node_name=~\"$host\"}, cpu)',
   label='CPU',
   refresh='load',
   sort=3,
@@ -227,7 +230,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-    'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu{instance="$host",mode!="idle"}[$interval]),1)) or (clamp_max(irate(node_cpu{instance="$host",mode!="idle"}[5m]),1)) ))*100 or (max_over_time(node_cpu_average{instance=~"$host", mode!="total", mode!="idle"}[$interval]) or max_over_time(node_cpu_average{instance=~"$host", mode!="total", mode!="idle"}[5m]))),100)',
+    'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\"}[5m]),1)) ))*100 or (max_over_time(node_cpu_average{node_name=~\"$host\", mode!=\"total\", mode!=\"idle\"}[$interval]) or max_over_time(node_cpu_average{node_name=~\"$host\", mode!=\"total\", mode!=\"idle\"}[5m]))),100)',
     intervalFactor = 1,
     legendFormat='{{mode}}',
     refId='A',
@@ -239,7 +242,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-    'clamp_max(max by () ((sum  by (cpu) ( (clamp_max(rate(node_cpu{instance="$host",mode!="idle",mode!="iowait"}[$interval]),1)) or (clamp_max(irate(node_cpu{instance="$host",mode!="idle",mode!="iowait"}[5m]),1)) )*100) or (max_over_time(node_cpu_average{instance=~"$host", mode!="total", mode!="idle", mode!="wait"}[$interval]) or max_over_time(node_cpu_average{instance=~"$host", mode!="total",mode!="idle", mode!="wait"}[5m]))),100)',
+    'clamp_max(max by () ((sum  by (cpu) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\",mode!=\"iowait\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\",mode!=\"iowait\"}[5m]),1)) )*100) or (max_over_time(node_cpu_average{node_name=~\"$host\", mode!=\"total\", mode!=\"idle\", mode!=\"wait\"}[$interval]) or max_over_time(node_cpu_average{node_name=~\"$host\", mode!=\"total\",mode!=\"idle\", mode!=\"wait\"}[5m]))),100)',
     intervalFactor = 1,
     legendFormat='Max Core Utilization',
     refId='B',
@@ -302,7 +305,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(avg by () ((sum by (cpu) ( (clamp_max(irate(node_cpu{instance="$host",mode!="idle",mode!="iowait"}[5m]),1))*100 )) or max_over_time(node_cpu_average{instance=~"$host", mode!="total",mode!="idle", mode!="wait"}[5m])) ,100)',
+      'clamp_max(avg by () ((sum by (cpu) ( (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\",mode!=\"iowait\"}[5m]),1))*100 )) or max_over_time(node_cpu_average{node_name=~\"$host\", mode!=\"total\",mode!=\"idle\", mode!=\"wait\"}[5m])) ,100)',
       intervalFactor = 1,
       legendFormat='Avg',
       refId='B',
@@ -313,7 +316,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-    'clamp_max((sum by (cpu) ( (clamp_max(irate(node_cpu{instance="$host",mode!="idle",mode!="iowait"}[5m])*100,100)) )) or sum by (cpu) (max_over_time(node_cpu_average{instance=~"$host", mode!="total",mode!="idle", mode!="wait"}[5m])) ,100)',
+      'clamp_max((sum by (cpu) ( (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\",mode!=\"iowait\"}[5m])*100,100)) )) or sum by (cpu) (max_over_time(node_cpu_average{node_name=~\"$host\", mode!=\"total\",mode!=\"idle\", mode!=\"wait\"}[5m])) ,100)',
       intervalFactor = 1,
       legendFormat='{{cpu}}',
       refId='A',
@@ -353,15 +356,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(sum by () ((avg by (mode) (
-      (clamp_max(rate(node_cpu{instance="$host",mode!="idle",mode!="iowait"}[$interval]),1)) or
-      (clamp_max(irate(node_cpu{instance="$host",mode!="idle",mode!="iowait"}[5m]),1)) )) *100 or
-      sum by () (
-      avg_over_time(node_cpu_average{instance="$host",mode!="total",mode!="idle"}[$interval]) or
-      avg_over_time(node_cpu_average{instance="$host",mode!="total",mode!="idle"}[5m])) unless
-      (avg_over_time(node_cpu_average{instance="$host",mode="total",job="rds-basic"}[$interval]) or
-      avg_over_time(node_cpu_average{instance="$host",mode="total",job="rds-basic"}[5m]))
-      ),100)',
+      'clamp_max(sum by () ((avg by (mode) ( \n(clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\",mode!=\"iowait\"}[$interval]),1)) or \n(clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\",mode!=\"iowait\"}[5m]),1)) )) *100 or \nsum by () (\navg_over_time(node_cpu_average{node_name=~\"$host\",mode!=\"total\",mode!=\"idle\"}[$interval]) or \navg_over_time(node_cpu_average{node_name=~\"$host\",mode!=\"total\",mode!=\"idle\"}[5m])) unless\n(avg_over_time(node_cpu_average{node_name=~\"$host\",mode=\"total\",job=\"rds-basic\"}[$interval]) or \navg_over_time(node_cpu_average{node_name=~\"$host\",mode=\"total\",job=\"rds-basic\"}[5m]))\n),100)',
       intervalFactor = 1,
       legendFormat='',
       refId='A',
@@ -388,9 +383,8 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu{instance="$host",mode="user"}[$interval]),1)) or (clamp_max(irate(node_cpu{instance="$host",mode="user"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{instance="$host", mode="user"}[$interval]) or avg_over_time(node_cpu_average{instance="$host", mode="user"}[5m]))),100)',
+      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",mode=\"user\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",mode=\"user\"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{node_name=~\"$host\", mode=\"user\"}[$interval]) or avg_over_time(node_cpu_average{node_name=~\"$host\", mode=\"user\"}[5m]))),100)',
       intervalFactor = 1,
-      legendFormat='',
       refId='A',
       interval='$interval',
     )
@@ -415,7 +409,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu{instance="$host",mode="system"}[$interval]),1)) or (clamp_max(irate(node_cpu{instance="$host",mode="system"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{instance="$host", mode="system"}[$interval]) or avg_over_time(node_cpu_average{instance="$host", mode="system"}[5m]))),100)',
+      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",mode=\"system\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",mode=\"system\"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{node_name=~\"$host\", mode=\"system\"}[$interval]) or avg_over_time(node_cpu_average{node_name=~\"$host\", mode=\"system\"}[5m]))),100)',
       intervalFactor = 1,
       refId='A',
       interval='$interval',
@@ -441,7 +435,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu{instance="$host",mode="iowait"}[$interval]),1)) or (clamp_max(irate(node_cpu{instance="$host",mode="iowait"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{instance="$host", mode="wait"}[$interval]) or avg_over_time(node_cpu_average{instance="$host", mode="wait"}[5m]))),100)',
+      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",mode=\"iowait\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",mode=\"iowait\"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{node_name=~\"$host\", mode=\"wait\"}[$interval]) or avg_over_time(node_cpu_average{node_name=~\"$host\", mode=\"wait\"}[5m]))),100)',
       intervalFactor = 1,
       refId='A',
       interval='$interval',
@@ -467,7 +461,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu{instance="$host",mode="steal"}[$interval]),1)) or (clamp_max(irate(node_cpu{instance="$host",mode="steal"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{instance="$host", mode="steal"}[$interval]) or avg_over_time(node_cpu_average{instance="$host", mode="steal"}[5m]))),100)',
+      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",mode=\"steal\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",mode=\"steal\"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{node_name=~\"$host\", mode=\"steal\"}[$interval]) or avg_over_time(node_cpu_average{node_name=~\"$host\", mode=\"steal\"}[5m]))),100)',
       intervalFactor = 1,
       refId='A',
       interval='$interval',
@@ -493,7 +487,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(((sum by () (avg by (mode) ( (clamp_max(rate(node_cpu{instance="$host",mode!="idle",mode!="user",mode!="system",mode!="iowait",mode!="steal"}[$interval]),1)) or (clamp_max(irate(node_cpu{instance="$host",mode!="idle",mode!="user",mode!="system",mode!="iowait",mode!="steal"}[5m]),1)) )) *100) or (sum(avg_over_time(node_cpu_average{instance="$host", mode!="total",mode!="idle",mode!="user",mode!="system",mode!="wait",mode!="steal"}[$interval])) or sum(avg_over_time(node_cpu_average{instance="$host", mode!="total",mode!="idle",mode!="user",mode!="system",mode!="wait",mode!="steal"}[5m])))),100)',
+      'clamp_max(((sum by () (avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\",mode!=\"user\",mode!=\"system\",mode!=\"iowait\",mode!=\"steal\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\",mode!=\"user\",mode!=\"system\",mode!=\"iowait\",mode!=\"steal\"}[5m]),1)) )) *100) or (sum(avg_over_time(node_cpu_average{node_name=~\"$host\", mode!=\"total\",mode!=\"idle\",mode!=\"user\",mode!=\"system\",mode!=\"wait\",mode!=\"steal\"}[$interval])) or sum(avg_over_time(node_cpu_average{node_name=~\"$host\", mode!=\"total\",mode!=\"idle\",mode!=\"user\",mode!=\"system\",mode!=\"wait\",mode!=\"steal\"}[5m])))),100)',
       intervalFactor = 1,
       refId='A',
       interval='$interval',
@@ -557,16 +551,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(
-      sum by (cpu) (
-      (avg by (mode) ( (clamp_max(rate(node_cpu{instance="$host",cpu="$cpu",mode!="idle",mode!="iowait"}[$interval]),1)) or
-      (clamp_max(irate(node_cpu{instance="$host",cpu="$cpu",mode!="idle",mode!="iowait"}[5m]),1)) )) *100) or
-      sum by () (
-      avg_over_time(node_cpu_average{instance="$host",mode!="total",mode!="idle"}[$interval]) or
-      avg_over_time(node_cpu_average{instance="$host",mode!="total",mode!="idle"}[5m])) unless
-      (avg_over_time(node_cpu_average{instance="$host",mode="total",job="rds-basic"}[$interval]) or
-      avg_over_time(node_cpu_average{instance="$host",mode="total",job="rds-basic"}[5m]))
-      ,100)',
+      'clamp_max(\nsum by (cpu) (\n(avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",cpu=\"$cpu\",mode!=\"idle\",mode!=\"iowait\"}[$interval]),1)) or \n(clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",cpu=\"$cpu\",mode!=\"idle\",mode!=\"iowait\"}[5m]),1)) )) *100) or \nsum by () (\navg_over_time(node_cpu_average{node_name=~\"$host\",mode!=\"total\",mode!=\"idle\"}[$interval]) or \navg_over_time(node_cpu_average{node_name=~\"$host\",mode!=\"total\",mode!=\"idle\"}[5m])) unless\n(avg_over_time(node_cpu_average{node_name=~\"$host\",mode=\"total\",job=\"rds-basic\"}[$interval]) or \navg_over_time(node_cpu_average{node_name=~\"$host\",mode=\"total\",job=\"rds-basic\"}[5m]))\n,100)',
       intervalFactor = 1,
       refId='A',
       interval='$interval',
@@ -594,7 +579,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu{instance="$host",cpu="$cpu",mode="user"}[$interval]),1)) or (clamp_max(irate(node_cpu{instance="$host",cpu="$cpu",mode="user"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{instance="$host", cpu="All", mode="user"}[$interval]) or avg_over_time(node_cpu_average{instance="$host", cpu="All", mode="user"}[5m]))),100)',
+      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",cpu=\"$cpu\",mode=\"user\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",cpu=\"$cpu\",mode=\"user\"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{node_name=~\"$host\", cpu=\"All\", mode=\"user\"}[$interval]) or avg_over_time(node_cpu_average{node_name=~\"$host\", cpu=\"All\", mode=\"user\"}[5m]))),100)',
       intervalFactor = 1,
       refId='A',
       interval='$interval',
@@ -620,7 +605,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu{instance="$host",cpu="$cpu",mode="system"}[$interval]),1)) or (clamp_max(irate(node_cpu{instance="$host",cpu="$cpu",mode="system"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{instance="$host", cpu="All", mode="system"}[$interval]) or avg_over_time(node_cpu_average{instance="$host", cpu="All", mode="system"}[5m]))),100)',
+      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",cpu=\"$cpu\",mode=\"system\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",cpu=\"$cpu\",mode=\"system\"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{node_name=~\"$host\", cpu=\"All\", mode=\"system\"}[$interval]) or avg_over_time(node_cpu_average{node_name=~\"$host\", cpu=\"All\", mode=\"system\"}[5m]))),100)',
       intervalFactor = 1,
       refId='A',
       interval='$interval',
@@ -646,7 +631,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu{instance="$host",cpu="$cpu",mode="iowait"}[$interval]),1)) or (clamp_max(irate(node_cpu{instance="$host",cpu="$cpu",mode="iowait"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{instance="$host", cpu="All", mode="wait"}[$interval]) or avg_over_time(node_cpu_average{instance="$host", cpu="All", mode="wait"}[5m]))),100)',
+      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",cpu=\"$cpu\",mode=\"iowait\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",cpu=\"$cpu\",mode=\"iowait\"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{node_name=~\"$host\", cpu=\"All\", mode=\"wait\"}[$interval]) or avg_over_time(node_cpu_average{node_name=~\"$host\", cpu=\"All\", mode=\"wait\"}[5m]))),100)',
       intervalFactor = 1,
       refId='A',
       interval='$interval',
@@ -672,7 +657,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu{instance="$host",cpu="$cpu",mode="steal"}[$interval]),1)) or (clamp_max(irate(node_cpu{instance="$host",cpu="$cpu",mode="steal"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{instance="$host", cpu="All", mode="steal"}[$interval]) or avg_over_time(node_cpu_average{instance="$host", cpu="All", mode="steal"}[5m]))),100)',
+      'clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",cpu=\"$cpu\",mode=\"steal\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",cpu=\"$cpu\",mode=\"steal\"}[5m]),1)) )) *100 or (avg_over_time(node_cpu_average{node_name=~\"$host\", cpu=\"All\", mode=\"steal\"}[$interval]) or avg_over_time(node_cpu_average{node_name=~\"$host\", cpu=\"All\", mode=\"steal\"}[5m]))),100)',
       intervalFactor = 1,
       refId='A',
       interval='$interval',
@@ -698,7 +683,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'clamp_max(((sum by (instance) (avg by (mode) ( (clamp_max(rate(node_cpu{instance="$host",cpu="$cpu",mode!="idle",mode!="user",mode!="system",mode!="iowait",mode!="steal"}[$interval]),1)) or (clamp_max(irate(node_cpu{instance="$host",cpu="$cpu",mode!="idle",mode!="user",mode!="system",mode!="iowait",mode!="steal"}[5m]),1)) )) *100) or (sum(avg_over_time(node_cpu_average{instance="$host", cpu="All",mode!="total",mode!="idle",mode!="user",mode!="system",mode!="wait",mode!="steal"}[$interval])) or sum(avg_over_time(node_cpu_average{instance="$host",cpu="All",mode!="total",mode!="idle",mode!="user",mode!="system",mode!="wait",mode!="steal"}[5m])))),100)',
+      'clamp_max(((sum by (instance) (avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",cpu=\"$cpu\",mode!=\"idle\",mode!=\"user\",mode!=\"system\",mode!=\"iowait\",mode!=\"steal\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",cpu=\"$cpu\",mode!=\"idle\",mode!=\"user\",mode!=\"system\",mode!=\"iowait\",mode!=\"steal\"}[5m]),1)) )) *100) or (sum(avg_over_time(node_cpu_average{node_name=~\"$host\", cpu=\"All\",mode!=\"total\",mode!=\"idle\",mode!=\"user\",mode!=\"system\",mode!=\"wait\",mode!=\"steal\"}[$interval])) or sum(avg_over_time(node_cpu_average{node_name=~\"$host\",cpu=\"All\",mode!=\"total\",mode!=\"idle\",mode!=\"user\",mode!=\"system\",mode!=\"wait\",mode!=\"steal\"}[5m])))),100)',
       intervalFactor = 1,
       refId='A',
       interval='$interval',
@@ -707,7 +692,7 @@ dashboard.new(
   gridPos = {
      "h": 3,
      "w": 4,
-     "x": 16,
+     "x": 20,
      "y": 23,
   },
   style=null,

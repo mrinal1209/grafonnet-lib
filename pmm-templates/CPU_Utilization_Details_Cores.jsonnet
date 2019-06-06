@@ -130,21 +130,7 @@ dashboard.new(
   )
 )
 .addTemplate(
-    template.interval(
-    'interval',//name
-    'auto,1s,5s,1m,5m,1h,6h,1d',//query
-    'auto',//current
-    'Prometheus',//datasource
-    label='Interval',
-    auto_count=200,
-    auto_min='1s',
-    datasource='Prometheus',
-    includeAll=false,
-    multi=false,
-    multiFormat='glob',
-    allFormat='glob',
-    valuelabels={'auto' : '$__auto_interval_interval'} ,
-    ),
+  template.interval('interval', 'auto,1s,5s,1m,5m,1h,6h,1d', 'auto', label='Interval', auto_count=200, auto_min='1s'),
 )
 .addTemplate(
   template.new(

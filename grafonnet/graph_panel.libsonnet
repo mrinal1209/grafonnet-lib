@@ -97,6 +97,7 @@
     repeatIteration=null,
     repeatPanelId=null,
     shared_tooltip=true,
+    links=[],
   ):: {
     title: title,
     [if maxPerRow != null then 'maxPerRow']: maxPerRow,
@@ -171,7 +172,7 @@
     [if repeatDirection != null then 'repeatDirection']: repeatDirection,
     seriesOverrides: [],
     thresholds: thresholds,
-    links: [],
+    links: links,
     yaxe(
       format='short',
       min=null,

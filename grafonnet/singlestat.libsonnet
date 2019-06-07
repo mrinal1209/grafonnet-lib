@@ -16,6 +16,8 @@
     mappingType=1,
     repeat=null,
     repeatDirection=null,
+    repeatIteration=null,
+    maxPerRow=null,
     prefix='',
     postfix='',
     colors=[
@@ -50,12 +52,15 @@
     gaugeMaxValue=100,
     gaugeThresholdMarkers=true,
     gaugeThresholdLabels=false,
+    links=[],
   )::
     {
       [if height != null then 'height']: height,
+      [if maxPerRow != null then 'maxPerRow']: maxPerRow,
       [if description != '' then 'description']: description,
       [if repeat != null then 'repeat']: repeat,
       [if repeatDirection != null then 'repeatDirection']: repeatDirection,
+      [if repeatIteration != null then 'repeatIteration']: repeatIteration,
       [if transparent != null then 'transparent']: transparent,
       [if min_span != null then 'minSpan']: min_span,
       title: title,
@@ -64,7 +69,7 @@
       datasource: datasource,
       targets: [
       ],
-      links: [],
+      links: links,
       [if decimals != null then 'decimals']: decimals,
       maxDataPoints: 100,
       interval: interval,

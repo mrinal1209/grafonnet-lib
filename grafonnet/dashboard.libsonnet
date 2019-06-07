@@ -18,6 +18,7 @@ local timepickerlib = import 'timepicker.libsonnet';
     description=null,
     version=null,
     iteration=null,
+    gnetId=null,
   ):: {
     local it = self,
     _annotations:: [],

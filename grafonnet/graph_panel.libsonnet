@@ -98,6 +98,7 @@
     repeatPanelId=null,
     shared_tooltip=true,
     links=[],
+    steppedLine = false,
   ):: {
     title: title,
     [if maxPerRow != null then 'maxPerRow']: maxPerRow,
@@ -157,7 +158,7 @@
       [if legend_sortDesc != null then 'sortDesc']: legend_sortDesc,
     },
     nullPointMode: nullPointMode,
-    steppedLine: false,
+    steppedLine: steppedLine,
     tooltip: {
       msResolution:msResolution,
       value_type: value_type,

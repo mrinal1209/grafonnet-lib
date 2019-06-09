@@ -53,9 +53,11 @@
     gaugeThresholdMarkers=true,
     gaugeThresholdLabels=false,
     links=[],
+    editable=null,
   )::
     {
       [if height != null then 'height']: height,
+      [if editable != null then 'editable']: editable,
       [if maxPerRow != null then 'maxPerRow']: maxPerRow,
       [if description != '' then 'description']: description,
       [if repeat != null then 'repeat']: repeat,

@@ -16,12 +16,16 @@ local timepickerlib = import 'timepicker.libsonnet';
     schemaVersion=14,
     uid='',
     description=null,
+    version=null,
+    iteration=null,
+    gnetId=null,
   ):: {
     local it = self,
     _annotations:: [],
     [if uid != '' then 'uid']: uid,
     editable: editable,
     [if description != null then 'description']: description,
+    [if iteration != null then 'iteration']: iteration,
     gnetId: null,
     graphTooltip:
       if graphTooltip == 'shared_tooltip' then 2
@@ -44,7 +48,7 @@ local timepickerlib = import 'timepicker.libsonnet';
     timezone: timezone,
     timepicker: timepicker,
     title: title,
-    version: 0,
+    version: version,
     addAnnotation(annotation):: self {
       _annotations+:: [annotation],
     },
@@ -112,7 +116,7 @@ local timepickerlib = import 'timepicker.libsonnet';
         _nextPanel: nextPanel + n,
         panels+::: _panels,
       },
-    addPanel(panel, gridPos):: self + self.addPanels([panel { gridPos: gridPos }]),
+    addPanel(panel, gridPos , style):: self + self.addPanels([panel { gridPos: gridPos , [if style != null then 'style']: style }]),
     addRows(rows):: std.foldl(function(d, row) d.addRow(row), rows, self),
     addLink(link):: self {
       links+: [link],

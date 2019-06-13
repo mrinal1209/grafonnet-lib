@@ -19,11 +19,13 @@
     tags=[],
     type='tags',
     builtIn=null,
+    limit=null
   )::
     {
       datasource: datasource,
       enable: enable,
       [if expr != null then 'expr']: expr,
+      [if limit != null then 'limit']: limit,
       hide: hide,
       iconColor: iconColor,
       name: name,

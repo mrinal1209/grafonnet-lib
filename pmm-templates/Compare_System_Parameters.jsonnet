@@ -1166,3 +1166,410 @@ dashboard.new(
   style=null,
 )//432 singlestat
 //here
+.addPanel(
+    row.new(
+      title='',
+    ),
+    gridPos={
+     "h": 1,
+     "w": 24,
+     "x": 0,
+     "y": 15,
+    },
+    style=null,
+)//260 row
+.addPanel(
+  graphPanel.new(
+    '$host - Saturation Metrics',//title
+    fill=2,
+    linewidth=2,
+    decimals=2,
+    datasource='Prometheus',
+    pointradius=5,
+    legend_values=true,
+    legend_min=true,
+    legend_max=true,
+    legend_avg=true,
+    legend_alignAsTable=true,
+    legend_rightSide=false,
+    legend_hideEmpty=false,
+    legend_show=true,
+    legend_sortDesc=true,
+    editable=true,
+    maxPerRow=6,
+    repeat='host',
+    format='short',
+    aliasColors={
+      "Allocated": "#E0752D",
+       "CPU Load": "#64B0C8",
+       "IO Load ": "#EA6460",
+       "Limit": "#1F78C1",
+       "Normalized CPU Load": "#6ED0E0",
+    },
+    links=[
+            {
+                "dashboard": "System Overview",
+                "dashUri": "db/system-overview",
+                "includeVars": true,
+                "keepTime": true,
+                "targetBlank": true,
+                "title": "System Overview",
+                "type": "dashboard"
+            }
+    ],
+  )
+  .addTarget(
+      prometheus.target(
+        '(avg_over_time(node_procs_running{node_name=~"$host"}[$interval])-1) / scalar(count(node_cpu_seconds_total{mode="user", node_name=~"$host"})) or (avg_over_time(node_procs_running{node_name=~"$host"}[5m])-1) / scalar(count(node_cpu_seconds_total{mode="user", node_name=~"$host"}))',
+        refId='B',
+        interval='$interval',
+        calculatedInterval='2s',
+        step=300,
+        intervalFactor=1,
+        legendFormat='Normalized CPU Load'
+      )
+  )
+  .addTarget(
+      prometheus.target(
+        'avg_over_time(node_procs_blocked{node_name=~"$host"}[$interval]) or avg_over_time(node_procs_blocked{node_name=~"$host"}[5m])',
+        refId='A',
+        interval='$interval',
+        calculatedInterval='2s',
+        step=300,
+        legendFormat='IO Load ',
+        intervalFactor=1,
+      )
+  ),
+  gridPos={
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 16,
+  },
+  style=null,
+)//39 graph
+.addPanel(
+  graphPanel.new(
+    '$host - Saturation Metrics',//title
+    fill=2,
+    linewidth=2,
+    decimals=2,
+    datasource='Prometheus',
+    pointradius=5,
+    legend_values=true,
+    legend_min=true,
+    legend_max=true,
+    legend_avg=true,
+    legend_alignAsTable=true,
+    legend_rightSide=false,
+    legend_hideEmpty=false,
+    legend_show=true,
+    legend_sortDesc=true,
+    editable=true,
+    maxPerRow=6,
+    repeat='host',
+    format='short',
+    aliasColors={
+      "Allocated": "#E0752D",
+       "CPU Load": "#64B0C8",
+       "IO Load ": "#EA6460",
+       "Limit": "#1F78C1",
+       "Normalized CPU Load": "#6ED0E0",
+    },
+    links=[
+            {
+                "dashboard": "System Overview",
+                "dashUri": "db/system-overview",
+                "includeVars": true,
+                "keepTime": true,
+                "targetBlank": true,
+                "title": "System Overview",
+                "type": "dashboard"
+            }
+    ],
+    repeatIteration=1553870190718,
+  )
+  .addTarget(
+      prometheus.target(
+        '(avg_over_time(node_procs_running{node_name=~\"$host\"}[$interval])-1) / scalar(count(node_cpu_seconds_total{mode=\"user\", node_name=~\"$host\"})) or (avg_over_time(node_procs_running{node_name=~\"$host\"}[5m])-1) / scalar(count(node_cpu_seconds_total{mode=\"user\", node_name=~\"$host\"}))',
+        refId='B',
+        interval='$interval',
+        calculatedInterval='2s',
+        step=300,
+        intervalFactor=1,
+        legendFormat='Normalized CPU Load'
+      )
+  )
+  .addTarget(
+      prometheus.target(
+        'avg_over_time(node_procs_blocked{node_name=~"$host"}[$interval]) or avg_over_time(node_procs_blocked{node_name=~"$host"}[5m])',
+        refId='A',
+        interval='$interval',
+        calculatedInterval='2s',
+        step=300,
+        legendFormat='IO Load ',
+        intervalFactor=1,
+      )
+  ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 12,
+    "y": 16,
+  },
+  style=null,
+)//433 graph
+.addPanel(
+    row.new(
+      title='',
+    ),
+    gridPos={
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 23,
+    },
+    style=null,
+)//268 row
+.addPanel(
+  graphPanel.new(
+    '$host - Load Average',//title
+    fill=1,
+    linewidth=2,
+    decimals=2,
+    datasource='Prometheus',
+    pointradius=5,
+    legend_values=true,
+    legend_min=true,
+    legend_max=true,
+    legend_avg=true,
+    legend_alignAsTable=true,
+    legend_show=true,
+    editable=true,
+    maxPerRow=6,
+    repeat='host',
+    format='short',
+    aliasColors={
+      "VCPUs": "#fce2de",
+      "mdb101 1m": "#bf1b00",
+    },
+    links=[
+            {
+              "dashUri": "db/system-overview",
+              "dashboard": "System Overview",
+              "includeVars": true,
+              "keepTime": true,
+              "params": "panelId=18&fullscreen",
+              "targetBlank": true,
+              "title": "System Overview",
+              "type": "dashboard",
+            }
+    ],
+    repeatIteration=1553870190718,
+  )
+  .addTarget(
+      prometheus.target(
+        'node_load1{node_name=~"$host"}',
+        refId='A',
+        interval='$interval',
+        step=1200,
+        intervalFactor=1,
+        legendFormat='LoadAvg 1m'
+      )
+  )
+  .addTarget(
+      prometheus.target(
+        'count(node_cpu_seconds_total{mode="user", node_name=~"$host"})',
+        refId='B',
+        interval='$interval',
+        legendFormat='VCPUs',
+        intervalFactor=1,
+      )
+  ),
+  gridPos={
+      "h": 7,
+      "w": 12,
+      "x": 0,
+      "y": 24,
+  },
+  style=null,
+)//13 graph
+.addPanel(
+  graphPanel.new(
+    '$host - Load Average',//title
+    fill=1,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    legend_values=true,
+    legend_min=true,
+    legend_max=true,
+    legend_avg=true,
+    legend_alignAsTable=true,
+    legend_show=true,
+    editable=true,
+    maxPerRow=6,
+    format='short',
+    aliasColors={
+      "VCPUs": "#fce2de",
+      "mdb101 1m": "#bf1b00",
+    },
+    links=[
+            {
+              "dashUri": "db/system-overview",
+              "dashboard": "System Overview",
+              "includeVars": true,
+              "keepTime": true,
+              "params": "panelId=18&fullscreen",
+              "targetBlank": true,
+              "title": "System Overview",
+              "type": "dashboard",
+            }
+    ],
+    repeatIteration=1553870190718,
+  )
+  .addTarget(
+      prometheus.target(
+        'node_load1{node_name=~"$host"}',
+        refId='A',
+        interval='$interval',
+        step=1200,
+        intervalFactor=1,
+        legendFormat='LoadAvg 1m'
+      )
+  )
+  .addTarget(
+      prometheus.target(
+        'count(node_cpu_seconds_total{mode="user", node_name=~"$host"})',
+        refId='B',
+        interval='$interval',
+        legendFormat='VCPUs',
+        intervalFactor=1,
+      )
+  ),
+  gridPos={
+   "h": 7,
+   "w": 12,
+   "x": 12,
+   "y": 24,
+  },
+  style=null,
+)//434 graph
+.addPanel(
+    row.new(
+      title='CPU',
+    ),
+    gridPos={
+    "h": 1,
+    "w": 24,
+    "x": 0,
+    "y": 31,
+    },
+    style=null,
+)//272 row
+.addPanel(
+  text.new(
+    content='<h1><i><font color=#5991A7><b><center>CPU</center></b></font></i></h1>',
+    height='20px',
+    mode='html',
+    transparent=true,
+  ),
+  gridPos={
+    "h": 2,
+    "w": 24,
+    "x": 0,
+    "y": 32,
+  },
+  style=null,
+)//99 text
+.addPanel(
+    row.new(
+      title='',
+    ),
+    gridPos={
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 34,
+    },
+    style=null,
+)//270 row
+.addPanel(
+  graphPanel.new(
+    '$host - CPU Usage',//title
+    fill=6,
+    linewidth=2,
+    decimals=2,
+    datasource='Prometheus',
+    pointradius=5,
+    legend_values=true,
+    legend_min=true,
+    legend_max=true,
+    legend_avg=true,
+    legend_alignAsTable=true,
+    legend_rightSide=false,
+    legend_hideEmpty=true,
+    legend_hideZero=true,
+    legend_show=true,
+    editable=true,
+    maxPerRow=6,
+    repeat='host',
+    aliasColors={
+      "Max Core Utilization": "#bf1b00",
+      "iowait": "#ef843c",
+      "nice": "#9ac48a",
+      "softirq": "#705da0",
+      "system": "#e5ac0e",
+      "user": "#508642",
+    },
+    links=[
+            {
+                "dashUri": "db/cpu-utilization-details-cores",
+                "dashboard": "CPU Utilization Details (Cores)",
+                "includeVars": true,
+                "keepTime": true,
+                "params": "&panelId=22&fullscreen",
+                "targetBlank": true,
+                "title": "CPU Utilization Details (Cores)",
+                "type": "dashboard",
+            }
+    ],
+    formatY1='percentunit',
+    formatY2='short',
+  )
+  .addSeriesOverride(
+       {
+          "alias": "Max Core Utilization",
+          "lines": false,
+          "pointradius": 1,
+          "points": true,
+          "stack": false,
+        },
+  )
+  .addTarget(
+      prometheus.target(
+        'clamp_max((avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~"$host",mode!="idle"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~"$host",mode!="idle"}[5m]),1)) )),1)',
+        refId='A',
+        interval='$interval',
+        step=1200,
+        intervalFactor=1,
+        legendFormat='{{mode}}'
+      )
+  )
+  .addTarget(
+      prometheus.target(
+        'clamp_max(max by () (sum  by (cpu) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~"$host",mode!="idle",mode!="iowait"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~"$host",mode!="idle",mode!="iowait"}[5m]),1)) )),1)',
+        refId='B',
+        interval='$interval',
+        legendFormat='Max Core Utilization',
+        intervalFactor=1,
+      )
+  ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 0,
+    "y": 35,
+  },
+  style=null,
+)//7 graph

@@ -116,7 +116,7 @@ local timepickerlib = import 'timepicker.libsonnet';
         _nextPanel: nextPanel + n,
         panels+::: _panels,
       },
-    addPanel(panel, gridPos , style):: self + self.addPanels([panel { gridPos: gridPos , [if style != null then 'style']: style }]),
+    addPanel(panel, gridPos , style):: self.addPanels([panel { gridPos: gridPos , [if style != null then 'style']: style }]),
     addRows(rows):: std.foldl(function(d, row) d.addRow(row), rows, self),
     addLink(link):: self {
       links+: [link],

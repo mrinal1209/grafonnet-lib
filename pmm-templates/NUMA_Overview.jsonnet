@@ -153,38 +153,6 @@ dashboard.new(
   refresh_on_load=false,
   ),
 )
-.addTemplate(
-  template.new(
-  'mountpoint',
-  'Prometheus',
-  'label_values(node_filesystem_avail_bytes{node_name=~"$host", fstype!~"rootfs|selinuxfs|autofs|rpc_pipefs|tmpfs"}, mountpoint)',
-  label='Mountpoint',
-  refresh='load',
-  sort=1,
-  allFormat='wildcard',
-  multiFormat='regex values',
-  multi=false,
-  skipUrlSync=false,
-  includeAll=true,
-  tagsQuery='up',
-  tagValuesQuery='instance',
-  refresh_on_load=false,
-  ),
-)
-.addTemplate(
-  template.new(
-  'node',
-  'Prometheus',
-  'label_values(node_memory_numa_numa_hit_total,node)',
-  label='Node',
-  refresh='load',
-  sort=0,
-  multi=false,
-  skipUrlSync=false,
-  includeAll=false,
-  refresh_on_load=false,
-  ),
-)
 .addPanel(
     row.new(
       title='Total',

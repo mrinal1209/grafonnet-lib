@@ -5,17 +5,18 @@ local template = grafana.template;
 local timepicker = grafana.timepicker;
 local prometheus = grafana.prometheus;
 local row = grafana.row;
+local pmm = grafana.pmm;
 
 
 dashboard.new(
   '_PMM Query Analytics',
   time_from='now-12h',
   editable=false,
-  refresh= "1m",
+  refresh= false,
   graphTooltip='shared_crosshair',
   schemaVersion=16,
   version=2,
-  tags=['OS','Percona'],
+  tags=['QAN','Percona'],
   iteration=1539869043503,
   uid='7w6Q3PJmz',
 )
@@ -40,7 +41,7 @@ dashboard.new(
     'Query Analytics',
     ['QAN'],
     type='link',
-    url='/graph/dashboard/db/_pmm-query-analytics',
+    url='/graph/d/7w6Q3PJmz/pmm-query-analytics',
     keepTime=true,
     includeVars=true,
     asDropdown=false,
@@ -137,3 +138,24 @@ dashboard.new(
      },
     style=null,
 )//7 row
+.addPanel(
+  pmm.new(
+    'PMM Query Analytics',
+    'pmm-qan-app-panel',
+    datasource='Prometheus',
+  )
+  .addTarget(
+      prometheus.target(
+        '',
+        refId='A',
+        intervalFactor=2,
+      )
+  ),
+  gridPos={
+   "h": 11,
+   "w": 24,
+   "x": 0,
+   "y": 10,
+  },
+  style=null,
+)//1 pmm

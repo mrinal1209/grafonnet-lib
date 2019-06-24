@@ -51,7 +51,7 @@
       query,
       label=null,
       current=null,
-      options=[]],
+      options=[],
       hide='',
       skipUrlSync=null,
       datasource=null,

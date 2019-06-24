@@ -13,7 +13,7 @@ local tablePanel = grafana.tablePanel;
 
 dashboard.new(
   'Advanced Data Exploration',
-  time_from='now-12h',
+  time_from='now-1h',
   editable=true,
   refresh= "1m",
   graphTooltip='shared_crosshair',
@@ -61,7 +61,7 @@ dashboard.new(
     'Query Analytics',
     ['QAN'],
     type='link',
-    url='/graph/dashboard/db/_pmm-query-analytics',
+    url='/graph/d/7w6Q3PJmz/pmm-query-analytics',
     keepTime=true,
     includeVars=true,
     asDropdown=false,
@@ -164,11 +164,20 @@ dashboard.new(
   hide=2,
   ),
 )
+.addTemplate(
+  template.pmmCustom(
+    'adhoc',
+    'adhoc',
+    null,
+    datasource='Prometheus',
+    label='Ad-hoc',
+    skipUrlSync=false,
+  )
+)
 .addPanel(
   singlestat.new(
     'Metric Name',//title
     datasource='Prometheus',
-    decimals=1,
     colorValue=true,
     thresholds='',
     colors=[
@@ -178,6 +187,7 @@ dashboard.new(
      ],
     height='50px',
     transparent=true,
+    valueFontSize='50%',
   )
   .addTarget(
     prometheus.target(
@@ -202,7 +212,6 @@ dashboard.new(
     'Metric Resolution',//title
     datasource='Prometheus',
     format='s',
-    decimals=1,
     colorValue=true,
     thresholds='',
     colors=[
@@ -251,6 +260,7 @@ dashboard.new(
     legend_show=true,
     legend_sortDesc=true,
     legend_sort='avg',
+    legend_current=true,
     editable=true,
     maxPerRow=6,
     repeat='host',
@@ -300,6 +310,7 @@ dashboard.new(
     legend_alignAsTable=true,
     legend_rightSide=false,
     legend_hideEmpty=false,
+    legend_current=true,
     legend_show=true,
     legend_sortDesc=true,
     legend_sort='avg',
@@ -346,9 +357,11 @@ dashboard.new(
     legend_show=true,
     legend_sortDesc=true,
     legend_sort='avg',
+    legend_current=true,
     editable=true,
     formatY1='ops',
     formatY2='short',
+    stack=true,
   )
   .addTarget(
       prometheus.target(

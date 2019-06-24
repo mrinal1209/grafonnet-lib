@@ -119,6 +119,22 @@ dashboard.new(
 .addTemplate(
     template.interval('interval', 'auto,1s,5s,1m,5m,1h,6h,1d', 'auto', label='Interval', auto_count=200, auto_min='1s'),
 )
+.addTemplate(
+    template.pmmCustom(
+      'pmmhost',//name
+      'constant',//type
+      'pmm-server',//query
+      skipUrlSync=false,
+      hide=2,
+      current='pmm-server',
+      options=[
+          {
+            "text": "pmm-server",
+            "value": "pmm-server"
+          }
+        ],
+    )
+)
 .addPanel(
   text.new(
     content='<h1><i><font color=#5991A7><b><center>Data for </font><font color=#e68a00>$pmmhost</font> <font color=#5991A7> with</font> </font><font color=#e68a00>$interval</font> <font color=#5991A7>resolution</center></b></font></i></h1>',

@@ -184,6 +184,13 @@ dashboard.new(
     format='ms',
     datasource='Prometheus',
     thresholds='',
+    valueMaps=[
+      {
+        value: 'null',
+        op: '=',
+        text: '0',
+      },
+    ],
   )
   .addTarget(
     prometheus.target(
@@ -248,6 +255,7 @@ dashboard.new(
     nullPointMode='null as zero',
     format='short',
     value_type='cumulative',
+    logBase1Y=2,
    )
   .addTarget(
       prometheus.target(
@@ -378,6 +386,7 @@ dashboard.new(
     formatY1='short',
     formatY2='bytes',
     value_type='cumulative',
+    min='0',
    )
   .addSeriesOverride(
       {
@@ -442,6 +451,16 @@ dashboard.new(
     formatY1='bytes',
     value_type='cumulative',
     nullPointMode='null as zero',
+   )
+   .resetYaxes()
+   .addYaxis(
+     format='bytes',
+     label='bytes/sec',
+     logBase=2,
+   )
+   .addYaxis(
+     label='blocks',
+     decimals=2,
    )
   .addSeriesOverride(
       {
@@ -593,6 +612,7 @@ dashboard.new(
     editable=true,
     format='short',
     nullPointMode='null',
+    logBase1Y=2,
    )
   .addTarget(
       prometheus.target(

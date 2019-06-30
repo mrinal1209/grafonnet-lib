@@ -262,8 +262,6 @@ dashboard.new(
     legend_sort='avg',
     legend_current=true,
     editable=true,
-    maxPerRow=6,
-    repeat='host',
     format='short',
     thresholds=[
       {

@@ -186,6 +186,14 @@ dashboard.new(
     editable=true,
     format='short',
   )
+  .resetYaxes()
+  .addYaxis(
+    label='Connections/sec',
+    min=0,
+  )
+  .addYaxis(
+    min=0,
+  )
   .addTarget(
       prometheus.target(
         'topk(5, (rate(mysql_info_schema_user_statistics_total_ssl_connections_total{service_name="$service"}[$interval]) + rate(mysql_info_schema_user_statistics_total_connections{service_name="$service"}[$interval]))>0) or topk(5, (irate(mysql_info_schema_user_statistics_total_ssl_connections_total{service_name="$service"}[5m]) + irate(mysql_info_schema_user_statistics_total_connections{service_name="$service"}[5m]))>0)',
@@ -224,6 +232,7 @@ dashboard.new(
     editable=true,
     formatY1='Bps',
     formatY2='short',
+    min=0,
   )
   .addTarget(
       prometheus.target(
@@ -264,6 +273,14 @@ dashboard.new(
     editable=true,
     format='short',
   )
+  .resetYaxes()
+  .addYaxis(
+    label='Rows/sec',
+    min=0,
+  )
+  .addYaxis(
+    min=0,
+  )
   .addTarget(
       prometheus.target(
         'topk(5, rate(mysql_info_schema_user_statistics_rows_fetched_total{service_name="$service"}[$interval])>0) or topk(5, irate(mysql_info_schema_user_statistics_rows_fetched_total{service_name="$service"}[5m])>0) or topk(5, rate(mysql_info_schema_user_statistics_rows_read_total{service_name="$service"}[$interval])>0) or topk(5, irate(mysql_info_schema_user_statistics_rows_read_total{service_name="$service"}[5m])>0)',
@@ -301,6 +318,15 @@ dashboard.new(
     legend_show=true,
     editable=true,
     format='short',
+  )
+  .resetYaxes()
+  .addYaxis(
+    label='Rows/sec',
+    min=0,
+  )
+  .addYaxis(
+    min=0,
+    show=false,
   )
   .addTarget(
       prometheus.target(
@@ -340,6 +366,7 @@ dashboard.new(
     legend_show=true,
     editable=true,
     format='short',
+    min=0,
   )
   .addTarget(
       prometheus.target(
@@ -378,6 +405,7 @@ dashboard.new(
     legend_show=true,
     editable=true,
     format='short',
+    min=0,
   )
   .addTarget(
       prometheus.target(

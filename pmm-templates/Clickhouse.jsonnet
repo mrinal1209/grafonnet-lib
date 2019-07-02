@@ -2,10 +2,14 @@ local grafana = import 'grafonnet/grafana.libsonnet';
 local dashboard = grafana.dashboard;
 local graphPanel = grafana.graphPanel;
 local annotation = grafana.annotation;
-local template = grafana.template;
-local prometheus = grafana.prometheus;
-local singlestat = grafana.singlestat;
 local text = grafana.text;
+local template = grafana.template;
+local timepicker = grafana.timepicker;
+local prometheus = grafana.prometheus;
+local row = grafana.row;
+local singlestat = grafana.singlestat;
+local tablePanel = grafana.tablePanel;
+
 
 dashboard.new(
   'Clickhouse',
@@ -151,8 +155,10 @@ dashboard.new(
     format='s',
     datasource='Prometheus',
     valueName='current',
+    decimals=1,
     colorValue=true,
     thresholds='3600,86400',
+    height='100px',
     postfixFontSize='80%',
     postfix='s',
   )
@@ -209,6 +215,7 @@ dashboard.new(
     datasource='Prometheus',
     valueName='current',
     thresholds='',
+    maxPerRow=6,
     editable=true,
   )
   .addTarget(
@@ -249,7 +256,6 @@ dashboard.new(
     format='short',
     value_type='cumulative',
     logBase1Y=2,
-    decimalsY1=2,
    )
   .addTarget(
       prometheus.target(
@@ -339,8 +345,6 @@ dashboard.new(
     nullPointMode='null as zero',
     format='short',
     value_type='cumulative',
-    decimalsY1=0,
-    minY1=0,
    )
   .addTarget(
       prometheus.target(
@@ -383,7 +387,6 @@ dashboard.new(
     formatY2='bytes',
     value_type='cumulative',
     min='0',
-    decimalsY2=2,
    )
   .addSeriesOverride(
       {
@@ -514,8 +517,6 @@ dashboard.new(
     format='short',
     value_type='cumulative',
     nullPointMode='null as zero',
-    decimalsY1=0,
-    minY1='0',
    )
   .addTarget(
       prometheus.target(
@@ -575,6 +576,7 @@ dashboard.new(
     value_type='cumulative',
     nullPointMode='null',
     logBase1Y=2,
+    min=0,
    )
   .addTarget(
       prometheus.target(
@@ -612,7 +614,6 @@ dashboard.new(
     format='short',
     nullPointMode='null',
     logBase1Y=2,
-    minY1=0,
    )
   .addTarget(
       prometheus.target(

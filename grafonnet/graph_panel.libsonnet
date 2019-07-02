@@ -51,6 +51,8 @@
     decimals=null,
     description=null,
     min_span=null,
+    min=null,
+    max=null,
     format='short',
     formatY1=null,
     formatY2=null,
@@ -123,8 +125,8 @@
     [if height != null then 'height']: height,
     renderer: 'flot',
     yaxes: [
-      self.yaxe(if formatY1 != null then formatY1 else format, min=minY1, max=maxY1, logBase=logBase1Y,decimals=decimalsY1,label=labelY1),
-      self.yaxe(if formatY2 != null then formatY2 else format, min=minY2, max=maxY2,logBase=logBase2Y,decimals=decimalsY2,label=labelY2),
+      self.yaxe(if formatY1 != null then formatY1 else format,if minY1 != null then minY1 else min,if maxY1 != null then maxY1 else max, logBase=logBase1Y,decimals=decimalsY1,label=labelY1),
+      self.yaxe(if formatY2 != null then formatY2 else format,if minY2 != null then minY2 else min,if maxY2 != null then maxY2 else max,logBase=logBase2Y,decimals=decimalsY2,label=labelY2),
     ],
     xaxis: {
       show: show_xaxis,

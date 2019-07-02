@@ -159,13 +159,13 @@ dashboard.new(
   template.new(
   'service',
   'Prometheus',
-  "label_values({__name__=~'postgres_exporter_build_info|mysqld_exporter_build_info|mongodb_exporter_build_info|proxysql_exporter_build_info',node_name=~''$host'}, service_name)",
+  'label_values({__name__=~"postgres_exporter_build_info|mysqld_exporter_build_info|mongodb_exporter_build_info|proxysql_exporter_build_info",node_name=~"$host"}, service_name)',
   label='Service',
   refresh='load',
   sort=1,
   multi=true,
   skipUrlSync=false,
-  definition="label_values({__name__=~'postgres_exporter_build_info|mysqld_exporter_build_info|mongodb_exporter_build_info|proxysql_exporter_build_info',node_name=~''$host'}, service_name)",
+  definition='label_values({__name__=~"postgres_exporter_build_info|mysqld_exporter_build_info|mongodb_exporter_build_info|proxysql_exporter_build_info",node_name=~"$host"}, service_name)',
   includeAll=true,
   ),
 )

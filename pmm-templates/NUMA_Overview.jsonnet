@@ -20,7 +20,7 @@ dashboard.new(
   schemaVersion=18,
   version=4,
   tags=['OS','Percona'],
-  iteration=1553887027378,
+  iteration=1560951716421,
   uid="8gx8yeMik",
   timepicker = timepicker.new(
     hidden = false,
@@ -41,7 +41,9 @@ dashboard.new(
     builtIn=1,
     iconColor='#e0752d',
     limit=100,
-    tags = ['pmm_annotation'],
+    tags = ["pmm_annotation",
+            "$host",
+            "$service"],
   )
 )
 .addAnnotation(
@@ -61,7 +63,7 @@ dashboard.new(
     'Query Analytics',
     ['QAN'],
     type='link',
-    url='/graph/dashboard/db/_pmm-query-analytics',
+    url='/graph/d/7w6Q3PJmz/pmm-query-analytics',
     keepTime=true,
     includeVars=true,
     asDropdown=false,
@@ -183,6 +185,20 @@ dashboard.new(
   skipUrlSync=false,
   includeAll=false,
   refresh_on_load=false,
+  ),
+)
+.addTemplate(
+  template.new(
+  'zone',
+  'Prometheus',
+  'label_values(node_buddyinfo_blocks{node_name=~"$host"}, zone)',
+  definition='label_values(node_buddyinfo_blocks{node_name=~"$host"}, zone)',
+  label='Zone',
+  refresh='load',
+  sort=0,
+  multi=true,
+  skipUrlSync=false,
+  includeAll=true,
   ),
 )
 .addPanel(
@@ -1144,7 +1160,7 @@ dashboard.new(
        "h": 7,
         "w": 12,
         "x": 0,
-        "y": 51,
+        "y": 2,
        }
     )//25 graph
     .addPanel(

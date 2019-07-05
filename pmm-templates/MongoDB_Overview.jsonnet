@@ -420,7 +420,9 @@ dashboard.new(
     'Query Efficiency',//title
     description='This panel shows how efficient the queries running against this instance are. If the *INDEX* counter is low while queries are running it means you could be missing indexes that would support your queries. If the *DOCUMENT* counter is high it means that there are a lot of documents being returned per query and you might need to check to make sure your queries are returning only the data they need to.',
     fill=2,
+    decimals=2,
     linewidth=2,
+    nullPointMode="null as zero",
     datasource='Prometheus',
     height='250px',
     pointradius=5,
@@ -485,6 +487,7 @@ dashboard.new(
     height='250px',
     pointradius=5,
     paceLength=10,
+    nullPointMode="null as zero",
     legend_values=true,
     legend_min=true,
     legend_max=true,

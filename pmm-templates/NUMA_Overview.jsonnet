@@ -238,6 +238,7 @@ dashboard.new(
       "Used": "#962d82",
     },
     stack=true,
+    minY1=0,
    )
   .addSeriesOverride(
      {
@@ -323,6 +324,7 @@ dashboard.new(
       "Used": "#962d82",
      },
     stack=true,
+    minY1='0',
    )
   .addTarget(
       prometheus.target(
@@ -384,7 +386,8 @@ dashboard.new(
     aliasColors={
       "Free (device /dev/xvda1, ext4)": "#82B5D8",
       "Used (device /dev/xvda1, ext4)": "#BA43A9",
-     },
+      },
+    minY1=0,
    )
   .addTarget(
       prometheus.target(
@@ -400,7 +403,7 @@ dashboard.new(
             'sum(node_memory_numa_Active{node_name=~"$host"})',
             refId='B',
             interval='$interval',
-            legendFormat='Used',
+            legendFormat='Active',
             intervalFactor=1,
             hide=false,
             calculatedInterval='2m',
@@ -534,6 +537,7 @@ dashboard.new(
     editable=true,
     formatY1='ops',
     formatY2='percent',
+    min=0,
    )
   .addSeriesOverride(
       {
@@ -723,6 +727,7 @@ dashboard.new(
     formatY1='bytes',
     formatY2='short',
     stack=true,
+    minY1=0,
    )
   .addTarget(
       prometheus.target(
@@ -771,6 +776,7 @@ dashboard.new(
     editable=true,
     formatY1='bytes',
     formatY2='short',
+    minY1=0,
    )
   .addTarget(
       prometheus.target(
@@ -830,7 +836,7 @@ dashboard.new(
     legend_sortDesc=true,
     legend_sort='avg',
     editable=true,
-    format='short',
+    minY1=0,
    )
   .addTarget(
       prometheus.target(
@@ -889,6 +895,7 @@ dashboard.new(
     formatY1='ops',
     formatY2='percent',
     stack=true,
+    min='0',
    )
   .addSeriesOverride(
     {
@@ -957,6 +964,7 @@ dashboard.new(
     editable=true,
     formatY1='ops',
     formatY2='percent',
+    min=0,
    )
   .addSeriesOverride(
      {
@@ -1093,6 +1101,7 @@ dashboard.new(
     row.new(
       title='Node $node',
       collapse=true,
+      repeat='node',
     )
     .addPanel(
       graphPanel.new(
@@ -1119,6 +1128,7 @@ dashboard.new(
           "Used": "#962d82",
         },
         stack=true,
+        minY1='0',
        )
       .addSeriesOverride(
          {
@@ -1214,7 +1224,7 @@ dashboard.new(
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 51,
+        "y": 2,
        }
     )//24 graph
     .addPanel(
@@ -1249,6 +1259,7 @@ dashboard.new(
           "Free (device /dev/xvda1, ext4)": "#82B5D8",
           "Used (device /dev/xvda1, ext4)": "#BA43A9",
          },
+         minY1=0,
        )
       .addTarget(
           prometheus.target(
@@ -1311,7 +1322,7 @@ dashboard.new(
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 58,
+        "y": 9,
        }
     )//44 graph
     .addPanel(
@@ -1360,7 +1371,7 @@ dashboard.new(
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 65,
+          "y": 16,
        }
     )//42 graph
     .addPanel(
@@ -1386,6 +1397,7 @@ dashboard.new(
         editable=true,
         formatY1='ops',
         formatY2='percent',
+        min='0',
        )
       .addSeriesOverride(
          {
@@ -1423,7 +1435,7 @@ dashboard.new(
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 65,
+        "y": 16,
        }
     )//43 graph
     .addPanel(
@@ -1473,7 +1485,7 @@ dashboard.new(
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 72,
+          "y": 23,
        }
     )//20 graph
     .addPanel(
@@ -1499,7 +1511,6 @@ dashboard.new(
         editable=true,
         formatY1='bytes',
         formatY2='short',
-        stack=true,
        )
       .addTarget(
           prometheus.target(
@@ -1523,7 +1534,7 @@ dashboard.new(
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 22,
+        "y": 23,
        }
     )//19 graph
     .addPanel(
@@ -1547,6 +1558,7 @@ dashboard.new(
         editable=true,
         formatY1='bytes',
         formatY2='short',
+        minY1='0',
        )
       .addTarget(
           prometheus.target(
@@ -1579,7 +1591,7 @@ dashboard.new(
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 79,
+        "y": 30,
        }
     )//48 graph
     .addPanel(
@@ -1606,6 +1618,7 @@ dashboard.new(
         legend_sort='avg',
         editable=true,
         format='short',
+        minY1='0',
        )
       .addTarget(
           prometheus.target(
@@ -1638,7 +1651,7 @@ dashboard.new(
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 79,
+          "y": 30,
        }
     )//49 graph
     .addPanel(
@@ -1677,7 +1690,7 @@ dashboard.new(
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 86,
+        "y": 37,
        }
     )//31 graph
     .addPanel(
@@ -1716,7 +1729,7 @@ dashboard.new(
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 86,
+        "y": 37,
        }
     )//33 graph
     .addPanel(
@@ -1788,7 +1801,7 @@ dashboard.new(
            "h": 7,
            "w": 12,
            "x": 0,
-           "y": 93,
+           "y": 44,
        }
     )//45 graph
     ,gridPos={
@@ -1799,3 +1812,245 @@ dashboard.new(
      },
      style=null,
 )//13 row
+.addPanel(
+  text.new(
+    content='<h1><i><font color=#5991A7><b><center>Free Memory Pages</center></b></font></i></h1>',
+    description="/proc/buddyinfo gives you an idea about the free memory fragments on your Linux box. You get to view the free fragments for each available order, for different zones of each numa node.
+
+    Note: Non-Uniform Memory Access (NUMA) refers to multiprocessor systems whose memory is divided into multiple memory nodes.
+
+    Each NUMA node is an entry in the kernel linked list pgdat_list. Each node is further divided into zones. Here are some example zone types:
+
+    DMA Zone: Lower 16 MiB of RAM used by legacy devices that cannot address anything beyond the first 16MiB of RAM.
+
+    DMA32 Zone (only on x86_64): Some devices can't address beyond the first 4GiB of RAM. On x86, this zone would probably be covered by Normal zone
+
+    Normal Zone: Anything above zone DMA and doesn't require kernel tricks to be addressable. Typically on x86, this is 16MiB to 896MiB. Many kernel operations require that the memory being used be from this zone
+
+    Highmem Zone (x86 only): Anything above 896MiB.",
+    mode='html',
+  ),
+  gridPos={
+    "h": 2,
+    "w": 24,
+    "x": 0,
+    "y": 51,
+  },
+  style=null,
+)//66 text
+.addPanel(
+    row.new(
+      title='Total',
+      collapse=true,
+    )
+    .addPanel(
+      graphPanel.new(
+        'Zone $zone',//title
+        description='Formula for chunks of memory 2^(Size * PAGE_SIZE) ',
+        fill=1,
+        linewidth=1,
+        decimals=0,
+        datasource='Prometheus',
+        pointradius=2,
+        legend_values=true,
+        legend_min=true,
+        legend_max=true,
+        legend_avg=true,
+        legend_rightSide=true,
+        legend_alignAsTable=true,
+        legend_show=true,
+        legend_sortDesc=true,
+        legend_sort='avg',
+        decimalsY1=0,
+        repeat='zone',
+        repeatDirection='v',
+       )
+      .addTarget(
+          prometheus.target(
+            'sum by (node,zone,size) (node_buddyinfo_blocks{node_name=~"$host", zone=~"$zone"})',
+            refId='A',
+            interval='$interval',
+            intervalFactor=1,
+            legendFormat='Size {{size}}'
+          )
+        ),
+      gridPos={
+           "h": 8,
+           "w": 24,
+           "x": 0,
+           "y": 54,
+       }
+    )//51 graph
+    .addPanel(
+      graphPanel.new(
+        'Zone $zone',//title
+        description='Formula for chunks of memory 2^(Size * PAGE_SIZE) ',
+        fill=1,
+        linewidth=1,
+        decimals=0,
+        datasource='Prometheus',
+        pointradius=2,
+        legend_values=true,
+        legend_min=true,
+        legend_max=true,
+        legend_avg=true,
+        legend_rightSide=true,
+        legend_alignAsTable=true,
+        legend_show=true,
+        legend_sortDesc=true,
+        legend_sort='avg',
+        decimalsY1=0,
+        repeatDirection='v',
+        repeatIteration=1560951716421,
+       )
+      .addTarget(
+          prometheus.target(
+            'sum by (node,zone,size) (node_buddyinfo_blocks{node_name=~"$host", zone=~"$zone"})',
+            refId='A',
+            interval='$interval',
+            intervalFactor=1,
+            legendFormat='Size {{size}}'
+          )
+        ),
+      gridPos={
+           "h": 8,
+           "w": 24,
+           "x": 0,
+           "y": 62,
+       }
+    )//85 graph
+    .addPanel(
+      graphPanel.new(
+        'Zone $zone',//title
+        description='Formula for chunks of memory 2^(Size * PAGE_SIZE) ',
+        fill=1,
+        linewidth=1,
+        decimals=0,
+        datasource='Prometheus',
+        pointradius=2,
+        legend_values=true,
+        legend_min=true,
+        legend_max=true,
+        legend_avg=true,
+        legend_rightSide=true,
+        legend_alignAsTable=true,
+        legend_show=true,
+        legend_sortDesc=true,
+        legend_sort='avg',
+        decimalsY1=0,
+        repeatDirection='v',
+        repeatIteration=1560951716421,
+       )
+      .addTarget(
+          prometheus.target(
+            'sum by (node,zone,size) (node_buddyinfo_blocks{node_name=~"$host", zone=~"$zone"})',
+            refId='A',
+            interval='$interval',
+            intervalFactor=1,
+            legendFormat='Size {{size}}'
+          )
+        ),
+      gridPos={
+           "h": 8,
+           "w": 24,
+           "x": 0,
+           "y": 70,
+       }
+    )//86 graph
+    ,gridPos={
+     "h": 1,
+     "w": 24,
+     "x": 0,
+     "y": 53,
+     },
+     style=null,
+)//58 row
+.addPanel(
+    row.new(
+      title='Node $node',
+      collapse=true,
+      repeat='node',
+    )
+    .addPanel(
+      graphPanel.new(
+        'Node $node - Zone $zone',//title
+        description='Formula for chunks of memory 2^(Size * PAGE_SIZE) ',
+        fill=1,
+        linewidth=1,
+        decimals=0,
+        pointradius=2,
+        legend_values=true,
+        legend_min=true,
+        legend_max=true,
+        legend_avg=true,
+        legend_rightSide=true,
+        legend_alignAsTable=true,
+        legend_show=true,
+        legend_sortDesc=true,
+        legend_sort='avg',
+        decimalsY1=0,
+        repeat='zone',
+        repeatDirection='v',
+       )
+      .addTarget(
+          prometheus.target(
+            'sum by (node,zone,size) (node_buddyinfo_blocks{node_name=~"$host", node="$node", zone=~"$zone"})',
+            refId='A',
+            interval='$interval',
+            intervalFactor=1,
+            legendFormat='Size {{size}}'
+          )
+        ),
+      gridPos={
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 55
+       }
+    )//52 graph
+    .addPanel(
+      graphPanel.new(
+        'Node $node - Zone $zone',//title
+        fill=1,
+        linewidth=1,
+        decimals=0,
+        datasource='Prometheus',
+        pointradius=2,
+        legend_values=true,
+        legend_min=true,
+        legend_max=true,
+        legend_avg=true,
+        legend_rightSide=true,
+        legend_alignAsTable=true,
+        legend_show=true,
+        legend_sortDesc=true,
+        legend_sort='avg',
+        decimalsY1=0,
+        repeatIteration=1560951716417,
+        repeatDirection='v',
+
+       )
+      .addTarget(
+          prometheus.target(
+            'sum by (node,zone,size) (node_buddyinfo_blocks{node_name=~"$host", node="$node", zone=~"$zone"})',
+            refId='A',
+            interval='$interval',
+            intervalFactor=1,
+            legendFormat='Page Size {{size}}'
+          )
+        ),
+      gridPos={
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 63
+       }
+    )//84 graph
+    ,gridPos={
+           "h": 1,
+           "w": 24,
+           "x": 0,
+           "y": 54
+     },
+     style=null,
+)//70 row

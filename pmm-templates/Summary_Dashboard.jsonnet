@@ -251,6 +251,7 @@ dashboard.new(
         interval='$interval',
         legendFormat='Max Core Utilization',
         intervalFactor=1,
+        hide=true,
       )
       ),
   gridPos={
@@ -607,6 +608,8 @@ dashboard.new(
     legend_min=true,
     legend_max=true,
     legend_avg=true,
+    legend_sortDesc=true,
+    legend_sort='avg',
     legend_alignAsTable=true,
     legend_show=true,
     editable=true,
@@ -717,6 +720,7 @@ dashboard.new(
     legend_rightSide=true,
     legend_sort='avg',
     legend_sortDesc=true,
+    legend_hideZero=true,
     editable=true,
     min=0,
    )

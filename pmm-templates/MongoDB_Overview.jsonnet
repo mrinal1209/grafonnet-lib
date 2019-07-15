@@ -22,6 +22,9 @@ dashboard.new(
   tags=[ "MongoDB","Percona"],
   iteration=1553588305920,
   uid="6Lk9wMHik",
+  timepicker = timepicker.new(
+    hidden = true,
+    )
 )
 .addAnnotation(
   grafana.annotation.datasource(

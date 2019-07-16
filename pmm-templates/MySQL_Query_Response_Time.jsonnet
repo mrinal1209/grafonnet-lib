@@ -164,19 +164,6 @@ dashboard.new(
   includeAll=false,
   ),
 )
-.addTemplate(
-  template.new(
-  'event',
-  'Prometheus',
-  'label_values(mysql_perf_schema_events_waits_seconds_total{service_name="$service"}, event_name)',
-  label='Event',
-  refresh='load',
-  sort=1,
-  multi=true,
-  skipUrlSync=false,
-  includeAll=false,
-  ),
-)
 .addPanel(
     row.new(
       title='Average Query Response Time',
@@ -343,9 +330,9 @@ dashboard.new(
 )//7 graph
 .addPanel(
   text.new(
-    content='These graphs are available only for [Percona Server](https://www.percona.com/doc/percona-server/5.6/diagnostics/response_time_distribution.html) and [MariaDB](https://mariadb.com/kb/en/mariadb/query_response_time-plugin/). It requires query response time plugin installed and `query_response_time_stats ` variable turned on.
+    content="These graphs are available only for [Percona Server](https://www.percona.com/doc/percona-server/5.6/diagnostics/response_time_distribution.html) and [MariaDB](https://mariadb.com/kb/en/mariadb/query_response_time-plugin/). It requires query response time plugin installed and `query_response_time_stats ` variable turned on.
 
-    Read/write split below is available only for Percona Server 5.6/5.7.',
+Read/write split below is available only for Percona Server 5.6/5.7.",
     datasource="Prometheus",
     height='50px',
     mode='markdown',

@@ -107,7 +107,7 @@
     shared_tooltip=true,
     links=[],
     steppedLine = false,
-    timeFrom: null,
+    timeFrom=null,
   ):: {
     title: title,
     [if maxPerRow != null then 'maxPerRow']: maxPerRow,

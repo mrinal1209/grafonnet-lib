@@ -107,6 +107,7 @@
     shared_tooltip=true,
     links=[],
     steppedLine = false,
+    timeFrom=null,
   ):: {
     title: title,
     [if maxPerRow != null then 'maxPerRow']: maxPerRow,
@@ -173,7 +174,7 @@
       shared: shared_tooltip,
       sort: if sort == 'decreasing' then 2 else if sort == 'increasing' then 1 else sort,
     },
-    timeFrom: null,
+    timeFrom: timeFrom,
     timeShift: null,
     [if transparent == true then 'transparent']: transparent,
     aliasColors: aliasColors,

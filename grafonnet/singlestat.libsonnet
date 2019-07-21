@@ -54,8 +54,12 @@
     gaugeThresholdLabels=false,
     links=[],
     editable=null,
+    timeFrom=null,
+    tableColumn='',
   )::
     {
+      [if timeFrom != null then 'timeFrom']: timeFrom,
+      tableColumn: tableColumn,
       [if height != null then 'height']: height,
       [if editable != null then 'editable']: editable,
       [if maxPerRow != null then 'maxPerRow']: maxPerRow,
@@ -123,7 +127,6 @@
         lineColor: sparklineLineColor,
         show: sparklineShow,
       },
-      tableColumn: '',
       _nextTarget:: 0,
       addTarget(target):: self {
         local nextTarget = super._nextTarget,

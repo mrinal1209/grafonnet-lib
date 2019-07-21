@@ -52,7 +52,7 @@
     sparklineMaxValue=100,
     gaugeThresholdMarkers=true,
     gaugeThresholdLabels=false,
-    links=links,
+    links=[],
   )::
     {
       [if height != null then 'height']: height,

@@ -180,6 +180,7 @@ dashboard.new(
     format='none',
     datasource='Prometheus',
     thresholds='',
+    tableColumn='node_name',
   )
   .addTarget(
     prometheus.target(
@@ -202,6 +203,7 @@ dashboard.new(
   singlestat.new(
     'IO Thread Running',//title
     colorBackground=true,
+    decimals=0,
     colors=[
         "rgba(161, 18, 18, 0.9)",
         "rgba(237, 129, 40, 0.89)",
@@ -284,6 +286,7 @@ dashboard.new(
   singlestat.new(
     'SQL Thread Running',//title
     colorBackground=true,
+    decimals=0,
     colors=[
         "rgba(161, 18, 18, 0.9)",
         "rgba(237, 129, 40, 0.89)",
@@ -360,6 +363,7 @@ dashboard.new(
   singlestat.new(
     'Replication Error No',//title
     colorValue=true,
+    decimals=0,
     colors=[
      "rgba(50, 172, 45, 0.97)",
       "rgba(237, 129, 40, 0.89)",
@@ -419,6 +423,7 @@ dashboard.new(
       "rgba(237, 129, 40, 0.89)",
       "rgba(245, 54, 54, 0.9)"
       ],
+      decimals=0,
     description='Displays whether the host is configured to be in Read Only mode or not.
 
     Possible values:
@@ -628,6 +633,7 @@ dashboard.new(
     editable=true,
     min=0,
     format='bytes',
+    timeFrom='24h',
   )
   .addSeriesOverride(
     {
@@ -735,6 +741,7 @@ dashboard.new(
     min=0,
     format='none',
     decimalsY1=0,
+    timeFrom='24h',
   )
   .addSeriesOverride(
       {
@@ -834,6 +841,7 @@ dashboard.new(
     editable=true,
     min=0,
     format='bytes',
+    timeFrom='24h',
   )
   .addSeriesOverride(
     {

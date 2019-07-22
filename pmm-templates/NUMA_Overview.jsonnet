@@ -14,7 +14,7 @@ local tablePanel = grafana.tablePanel;
 dashboard.new(
   'NUMA Overview',
   time_from='now-12h',
-  editable=true,
+  editable=false,
   refresh= "1m",
   graphTooltip='shared_crosshair',
   schemaVersion=18,
@@ -112,14 +112,6 @@ dashboard.new(
 )
 .addLink(
   grafana.link.dashboards(
-    'Cloud',
-    ['Cloud'],
-    keepTime=true,
-    includeVars=true,
-  )
-)
-.addLink(
-  grafana.link.dashboards(
     'Insight',
     ['Insight'],
     keepTime=true,
@@ -185,6 +177,7 @@ dashboard.new(
   skipUrlSync=false,
   includeAll=false,
   refresh_on_load=false,
+  hide=2,
   ),
 )
 .addTemplate(
@@ -199,6 +192,7 @@ dashboard.new(
   multi=true,
   skipUrlSync=false,
   includeAll=true,
+  hide=2,
   ),
 )
 .addPanel(

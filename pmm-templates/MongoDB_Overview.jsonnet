@@ -14,7 +14,7 @@ local tablePanel = grafana.tablePanel;
 dashboard.new(
   'MongoDB Overview',
   time_from='now-12h',
-  editable=true,
+  editable=false,
   refresh= "1m",
   graphTooltip='shared_crosshair',
   schemaVersion=18,
@@ -23,7 +23,8 @@ dashboard.new(
   iteration=1553588305920,
   uid="6Lk9wMHik",
   timepicker = timepicker.new(
-    hidden = true,
+    hidden = false,
+    now=true,
     )
 )
 .addAnnotation(
@@ -101,14 +102,6 @@ dashboard.new(
   grafana.link.dashboards(
     'HA',
     ['HA'],
-    keepTime=true,
-    includeVars=true,
-  )
-)
-.addLink(
-  grafana.link.dashboards(
-    'Cloud',
-    ['Cloud'],
     keepTime=true,
     includeVars=true,
   )
@@ -487,7 +480,6 @@ dashboard.new(
     fill=2,
     linewidth=2,
     datasource='Prometheus',
-    height='250px',
     pointradius=5,
     paceLength=10,
     nullPointMode="null as zero",

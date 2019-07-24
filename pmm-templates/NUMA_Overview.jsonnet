@@ -163,6 +163,7 @@ dashboard.new(
   tagsQuery='up',
   tagValuesQuery='instance',
   refresh_on_load=false,
+  hide=2,
   ),
 )
 .addTemplate(
@@ -322,8 +323,7 @@ dashboard.new(
    )
   .addTarget(
       prometheus.target(
-        'sum by (node) (node_memory_numa_MemFree{node_name=~"$host"}) * 100 /
-        sum by (node) (node_memory_numa_MemTotal{node_name=~"$host"})',
+        'sum by (node) (node_memory_numa_MemFree{node_name=~\"$host\"}) * 100 /\nsum by (node) (node_memory_numa_MemTotal{node_name=~\"$host\"})',
         refId='A',
         interval='$interval',
         legendFormat='Free',
@@ -332,8 +332,7 @@ dashboard.new(
       )
   .addTarget(
           prometheus.target(
-            'sum by (node) (node_memory_numa_MemUsed{node_name=~"$host"}) * 100 /
-            sum by (node) (node_memory_numa_MemTotal{node_name=~"$host"})',
+            'sum by (node) (node_memory_numa_MemUsed{node_name=~\"$host\"}) * 100 /\nsum by (node) (node_memory_numa_MemTotal{node_name=~\"$host\"})',
             refId='B',
             interval='$interval',
             legendFormat='Used',
@@ -352,13 +351,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'NUMA Memory Usage Types',//title
-    description='**Dirty** Memory waiting to be written back to disk
-
-    **Bounce** Memory used for block device bounce buffers
-
-    **Mapped** Files which have been mmaped, such as libraries
-
-    **KernelStack** The memory the kernel stack uses. This is not reclaimable.',
+    description='**Dirty** Memory waiting to be written back to disk\n\n**Bounce** Memory used for block device bounce buffers\n\n**Mapped** Files which have been mmaped, such as libraries\n\n**KernelStack** The memory the kernel stack uses. This is not reclaimable.',
     fill=0,
     linewidth=2,
     decimals=2,
@@ -511,9 +504,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'NUMA Allocation Missed',//title
-    description='**Memory missed** is allocated on a node despite the process preferring some different node.
-
-    **Memory foreign** is intended for a node, but actually allocated on some different node.',
+    description='**Memory missed** is allocated on a node despite the process preferring some different node.\n\n**Memory foreign** is intended for a node, but actually allocated on some different node.',
     fill=2,
     linewidth=2,
     decimals=2,
@@ -649,9 +640,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'Anonymous Memory',//title
-    description='**Active anonymous memory** that has been used more recently and usually not swapped out.
-
-    **Inactive anonymous memory** that has not been used recently and can be swapped out.',
+    description='**Active anonymous memory** that has been used more recently and usually not swapped out.\n\n**Inactive anonymous memory** that has not been used recently and can be swapped out.',
     fill=2,
     linewidth=2,
     decimals=2,
@@ -700,9 +689,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'NUMA File (PageCache)',//title
-    description='**Active(file)** Pagecache memory that has been used more recently and usually not reclaimed until needed
-
-    **Inactive(file)** Pagecache memory that can be reclaimed without huge performance impact',
+    description='**Active(file)** Pagecache memory that has been used more recently and usually not reclaimed until needed\n\n**Inactive(file)** Pagecache memory that can be reclaimed without huge performance impact',
     fill=2,
     linewidth=2,
     decimals=2,
@@ -810,11 +797,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'HugePages Statistic',//title
-    description='**Total** Number of hugepages being allocated by the kernel (Defined with vm.nr_hugepages)
-
-    **Free** The number of hugepages not being allocated by a process
-
-    **Surp**  The number of hugepages in the pool above the value in vm.nr_hugepages. The maximum number of surplus hugepages is controlled by vm.nr_overcommit_hugepages.',
+    description='**Total** Number of hugepages being allocated by the kernel (Defined with vm.nr_hugepages)\n\n**Free** The number of hugepages not being allocated by a process\n\n**Surp**  The number of hugepages in the pool above the value in vm.nr_hugepages. The maximum number of surplus hugepages is controlled by vm.nr_overcommit_hugepages.',
     fill=2,
     linewidth=2,
     decimals=2,
@@ -1021,11 +1004,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'Slab Memory',//title
-    description="**Slab** allocation is a memory management mechanism intended for the efficient memory allocation of kernel objects.
-
-    **SReclaimable** The part of the Slab that might be reclaimed (such as caches).
-
-    **SUnreclaim** The part of the Slab that can't be reclaimed under memory pressure",
+    description="**Slab** allocation is a memory management mechanism intended for the efficient memory allocation of kernel objects.\n\n**SReclaimable** The part of the Slab that might be reclaimed (such as caches).\n\n**SUnreclaim** The part of the Slab that can't be reclaimed under memory pressure",
     fill=2,
     linewidth=2,
     decimals=2,
@@ -1224,13 +1203,7 @@ dashboard.new(
     .addPanel(
       graphPanel.new(
         'Node $node - NUMA Memory Usage Types',//title
-        description='**Dirty** Memory waiting to be written back to disk
-
-        **Bounce** Memory used for block device bounce buffers
-
-        **Mapped** Files which have been mmaped, such as libraries
-
-        **KernelStack** The memory the kernel stack uses. This is not reclaimable.',
+        description='**Dirty** Memory waiting to be written back to disk\n\n**Bounce** Memory used for block device bounce buffers\n\n**Mapped** Files which have been mmaped, such as libraries\n\n**KernelStack** The memory the kernel stack uses. This is not reclaimable.',
         fill=0,
         linewidth=2,
         decimals=2,
@@ -1371,9 +1344,7 @@ dashboard.new(
     .addPanel(
       graphPanel.new(
         'Node $node - NUMA Allocation Missed/Foreign',//title
-        description='**Memory missed** is allocated on a node despite the process preferring some different node.
-
-        **Memory foreign** is intended for a node, but actually allocated on some different node.',
+        description='**Memory missed** is allocated on a node despite the process preferring some different node.\n\n**Memory foreign** is intended for a node, but actually allocated on some different node.',
         fill=2,
         linewidth=2,
         decimals=2,
@@ -1435,9 +1406,7 @@ dashboard.new(
     .addPanel(
       graphPanel.new(
         'Node $node - Anonymous Memory',//title
-        description='**Active anonymous memory** that has been used more recently and usually not swapped out.
-
-        **Inactive anonymous memory** that has not been used recently and can be swapped out.',
+        description='**Active** Anonymous memory that has been used more recently and usually not swapped out\n\n**Inactive** Anonymous memory that has not been used recently and can be swapped out',
         fill=2,
         linewidth=2,
         decimals=2,
@@ -1485,9 +1454,7 @@ dashboard.new(
     .addPanel(
       graphPanel.new(
         'Node $node - NUMA File (PageCache)',//title
-        description='**Active(file)** Pagecache memory that has been used more recently and usually not reclaimed until needed
-
-        **Inactive(file)** Pagecache memory that can be reclaimed without huge performance impact',
+        description='**Active(file)** Pagecache memory that has been used more recently and usually not reclaimed until needed\n\n**Inactive(file)** Pagecache memory that can be reclaimed without huge performance impact',
         fill=2,
         linewidth=2,
         decimals=2,
@@ -1591,11 +1558,7 @@ dashboard.new(
     .addPanel(
       graphPanel.new(
         'Node $node - HugePages Statistic',//title
-        description='**Total** Number of hugepages being allocated by the kernel (Defined with vm.nr_hugepages)
-
-        **Free** The number of hugepages not being allocated by a process
-
-        **Surp**  The number of hugepages in the pool above the value in vm.nr_hugepages. The maximum number of surplus hugepages is controlled by vm.nr_overcommit_hugepages.',
+        description='**Total** Number of hugepages being allocated by the kernel (Defined with vm.nr_hugepages)\n\n**Free** The number of hugepages not being allocated by a process\n\n**Surp**  The number of hugepages in the pool above the value in vm.nr_hugepages. The maximum number of surplus hugepages is controlled by vm.nr_overcommit_hugepages.',
         fill=2,
         linewidth=2,
         decimals=2,
@@ -1651,7 +1614,7 @@ dashboard.new(
     .addPanel(
       graphPanel.new(
         'Node $node - Local Processes',//title
-        description='Memory allocated on a node while a process was running on it.',
+        description='Memory allocated on this node while a process was running on it.',
         fill=2,
         linewidth=2,
         decimals=2,
@@ -1690,7 +1653,7 @@ dashboard.new(
     .addPanel(
       graphPanel.new(
         'Node $node - Remote Processes',//title
-        description='Memory allocated on a node while a process was running on some other node.',
+        description='Memory allocated on this node while a process was running on some other node.',
         fill=2,
         linewidth=2,
         decimals=2,
@@ -1729,11 +1692,7 @@ dashboard.new(
     .addPanel(
       graphPanel.new(
         'Node $node - Slab Memory',//title
-        description="**Slab** allocation is a memory management mechanism intended for the efficient memory allocation of kernel objects.
-
-        **SReclaimable** The part of the Slab that might be reclaimed (such as caches).
-
-        **SUnreclaim** The part of the Slab that can't be reclaimed under memory pressure",
+        description="**Slab** allocation is a memory management mechanism intended for the efficient memory allocation of kernel objects.\n\n**SReclaimable** The part of the Slab that might be reclaimed (such as caches).\n\n**SUnreclaim** The part of the Slab that can't be reclaimed under memory pressure",
         fill=2,
         linewidth=2,
         decimals=2,
@@ -1808,20 +1767,8 @@ dashboard.new(
 )//13 row
 .addPanel(
   text.new(
-    content='<h1><i><font color=#5991A7><b><center>Free Memory Pages</center></b></font></i></h1>',
-    description="/proc/buddyinfo gives you an idea about the free memory fragments on your Linux box. You get to view the free fragments for each available order, for different zones of each numa node.
-
-    Note: Non-Uniform Memory Access (NUMA) refers to multiprocessor systems whose memory is divided into multiple memory nodes.
-
-    Each NUMA node is an entry in the kernel linked list pgdat_list. Each node is further divided into zones. Here are some example zone types:
-
-    DMA Zone: Lower 16 MiB of RAM used by legacy devices that cannot address anything beyond the first 16MiB of RAM.
-
-    DMA32 Zone (only on x86_64): Some devices can't address beyond the first 4GiB of RAM. On x86, this zone would probably be covered by Normal zone
-
-    Normal Zone: Anything above zone DMA and doesn't require kernel tricks to be addressable. Typically on x86, this is 16MiB to 896MiB. Many kernel operations require that the memory being used be from this zone
-
-    Highmem Zone (x86 only): Anything above 896MiB.",
+    content='<h1><i><font color=#5991A7><b><center>Free Memory Pages</center></b></font></i></h1>\n\n\n',
+    description="/proc/buddyinfo gives you an idea about the free memory fragments on your Linux box. You get to view the free fragments for each available order, for different zones of each numa node.\n\nNote: Non-Uniform Memory Access (NUMA) refers to multiprocessor systems whose memory is divided into multiple memory nodes.\n\nEach NUMA node is an entry in the kernel linked list pgdat_list. Each node is further divided into zones. Here are some example zone types:\n\nDMA Zone: Lower 16 MiB of RAM used by legacy devices that cannot address anything beyond the first 16MiB of RAM.\n\nDMA32 Zone (only on x86_64): Some devices can't address beyond the first 4GiB of RAM. On x86, this zone would probably be covered by Normal zone\n\nNormal Zone: Anything above zone DMA and doesn't require kernel tricks to be addressable. Typically on x86, this is 16MiB to 896MiB. Many kernel operations require that the memory being used be from this zone\n\nHighmem Zone (x86 only): Anything above 896MiB.",
     mode='html',
   ),
   gridPos={

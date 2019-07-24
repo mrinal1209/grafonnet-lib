@@ -20,7 +20,7 @@ dashboard.new(
   schemaVersion=16,
   version=1,
   tags=['MongoDB','Percona'],
-  iteration=1529322310813,
+  iteration=1563962267866,
   uid="n9z9QGNiz",
   timepicker = timepicker.new(
     hidden = false,
@@ -149,6 +149,7 @@ dashboard.new(
     valueName='current',
     decimals=0,
     thresholds='',
+    hideTimeOverride=true,
     colors=[
       "rgba(245, 54, 54, 0.9)",
       "rgba(237, 129, 40, 0.89)",
@@ -184,6 +185,7 @@ dashboard.new(
     valueName='current',
     decimals=0,
     thresholds='',
+    hideTimeOverride=true,
     colors=[
       "rgba(245, 54, 54, 0.9)",
       "rgba(237, 129, 40, 0.89)",
@@ -203,7 +205,7 @@ dashboard.new(
     )
   ),
   gridPos = {
-      "h": 3,
+      "h": 2,
       "w": 6,
       "x": 6,
       "y": 0,
@@ -219,6 +221,7 @@ dashboard.new(
     valueName='current',
     decimals=0,
     thresholds='',
+    hideTimeOverride=true,
     colors=[
       "rgba(245, 54, 54, 0.9)",
       "rgba(237, 129, 40, 0.89)",
@@ -238,7 +241,7 @@ dashboard.new(
     )
   ),
   gridPos = {
-      "h": 3,
+      "h": 2,
       "w": 6,
       "x": 12,
       "y": 0,
@@ -254,6 +257,7 @@ dashboard.new(
     valueName='current',
     decimals=0,
     thresholds='',
+    hideTimeOverride=true,
     colors=[
       "rgba(245, 54, 54, 0.9)",
       "rgba(237, 129, 40, 0.89)",
@@ -273,7 +277,7 @@ dashboard.new(
     )
   ),
   gridPos = {
-      "h": 3,
+      "h": 2,
       "w": 6,
       "x": 18,
       "y": 0,
@@ -289,6 +293,7 @@ dashboard.new(
     valueName='current',
     decimals=0,
     thresholds='',
+    hideTimeOverride=true,
     colors=[
       "rgba(245, 54, 54, 0.9)",
       "rgba(237, 129, 40, 0.89)",
@@ -308,21 +313,22 @@ dashboard.new(
     )
   ),
   gridPos = {
-      "h": 3,
+      "h": 2,
       "w": 6,
       "x": 0,
-      "y": 3,
+      "y": 2,
     },
   style=null,
 )//11 singlestat
 .addPanel(
   singlestat.new(
     'Balancer Enabled',//title
-    colorValue=false,
+    colorValue=true,
     format='none',
     datasource='Prometheus',
     valueName='current',
-    thresholds='',
+    thresholds='0,1',
+    hideTimeOverride=true,
     colors=[
       "rgba(245, 54, 54, 0.9)",
       "rgba(237, 129, 40, 0.89)",
@@ -353,10 +359,10 @@ dashboard.new(
     )
   ),
   gridPos = {
-      "h": 3,
+      "h": 2,
       "w": 6,
       "x": 6,
-      "y": 3,
+      "y": 2,
     },
   style=null,
 )//5 singlestat
@@ -369,6 +375,7 @@ dashboard.new(
     valueName='current',
     decimals=0,
     thresholds='',
+    hideTimeOverride=true,
     colors=[
       "rgba(245, 54, 54, 0.9)",
       "rgba(237, 129, 40, 0.89)",

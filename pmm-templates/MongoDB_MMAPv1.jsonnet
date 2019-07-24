@@ -249,6 +249,7 @@ dashboard.new(
     datasource='Prometheus',
     editable=true,
     thresholds='',
+    hideTimeOverride=true,
     colors=[
       "rgba(245, 54, 54, 0.9)",
       "rgba(237, 129, 40, 0.89)",
@@ -883,6 +884,7 @@ dashboard.new(
     editable=true,
     value_type='cumulative',
     minY1=0,
+    logBase1Y=10,
   )
   .addTarget(
       prometheus.target(

@@ -207,7 +207,6 @@ dashboard.new(
     format='none',
     datasource='Prometheus',
     valueName='current',
-    decimals=1,
     thresholds='',
     colors=[
       "rgba(245, 54, 54, 0.9)",
@@ -307,8 +306,7 @@ dashboard.new(
 .addPanel(
   pmmSinglestat.new(
     'Memory Available',//title
-    description='Percent of Memory Available
-    Note: on Modern Linux Kernels amount of Memory Available for application is not the same as Free+Cached+Buffers',
+    description='Percent of Memory Available\nNote: on Modern Linux Kernels amount of Memory Available for application is not the same as Free+Cached+Buffers',
     colorValue=true,
     format='percent',
     datasource='Prometheus',
@@ -394,6 +392,17 @@ dashboard.new(
     valueFontSize='50%',
     interval='$interval',
     editable=true,
+    links=[
+                {
+                    "dashboard": "Disk Space",
+                    "dashUri": "db/disk-space",
+                    "includeVars": true,
+                    "keepTime": true,
+                    "targetBlank": true,
+                    "title": "Disk Space",
+                    "type": "dashboard"
+                }
+            ],
   )
   .addTarget(
     prometheus.target(

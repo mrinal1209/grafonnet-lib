@@ -177,11 +177,7 @@ dashboard.new(
 .addPanel(
   pmmSinglestat.new(
     'Avg CPU Usage per Host',//title
-    description='Shows the average CPU usage in percent per host for all exporters. An Exporter is a software library that provides metrics to PMM.
-
-    Note that the CPU usage is only the CPU usage of the exporter itself. It does not include the additional resource usage that is required to produce metrics by the application or operating system.
-
-    See also:',
+    description='Shows the average CPU usage in percent per host for all exporters. An Exporter is a software library that provides metrics to PMM.\n\nNote that the CPU usage is only the CPU usage of the exporter itself. It does not include the additional resource usage that is required to produce metrics by the application or operating system.\n\nSee also:',
     format='percent',
     datasource='Prometheus',
     valueName='current',
@@ -284,9 +280,7 @@ dashboard.new(
 .addPanel(
   singlestat.new(
     'Monitored Hosts',//title
-    description='Shows the number of monitored hosts that are running Exporters. An Exporter is a software library that provides metrics to PMM.
-
-    See also:',
+    description='Shows the number of monitored hosts that are running Exporters. An Exporter is a software library that provides metrics to PMM.\n\nSee also:',
     format='short',
     datasource='Prometheus',
     valueName='current',
@@ -339,9 +333,7 @@ dashboard.new(
 .addPanel(
   singlestat.new(
     'Exporters Running',//title
-    description='Shows the total number of Exporters running with this PMM Server instance. An Exporter is a software library that provides metrics to PMM.
-
-    See also:',
+    description='Shows the total number of Exporters running with this PMM Server instance. An Exporter is a software library that provides metrics to PMM.\n\nSee also:',
     format='short',
     datasource='Prometheus',
     valueName='current',
@@ -406,9 +398,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'CPU Usage',//title
-    description="Plots the Exporters' CPU usage across each monitored host (by default, All hosts). An Exporter is a software library that provides metrics to PMM.
-
-    See also:",
+    description="Plots the Exporters' CPU usage across each monitored host (by default, All hosts). An Exporter is a software library that provides metrics to PMM.\n\nSee also:",
     fill=1,
     linewidth=1,
     decimals=2,
@@ -461,9 +451,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'Memory Usage',//title
-    description="Plots the Exporters' Memory usage across each monitored host (by default, All hosts). An Exporter is a software library that provides metrics to PMM.
-
-    See also:",
+    description="Plots the Exporters' Memory usage across each monitored host (by default, All hosts). An Exporter is a software library that provides metrics to PMM.\n\nSee also:",
     fill=1,
     linewidth=1,
     decimals=2,
@@ -526,9 +514,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'CPU Cores Used',//title
-    description="Shows the Exporters' CPU Cores used for each type of Exporter. An Exporter is a software library that provides metrics to PMM.
-
-    See also:",
+    description="Shows the Exporters' CPU Cores used for each type of Exporter. An Exporter is a software library that provides metrics to PMM.\n\nSee also:",
     fill=1,
     linewidth=1,
     decimals=2,
@@ -579,9 +565,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'Memory Usage',//title
-    description="Shows the Exporters' memory used for each type of Exporter. An Exporter is a software library that provides metrics to PMM.
-
-    See also:",
+    description="Shows the Exporters' memory used for each type of Exporter. An Exporter is a software library that provides metrics to PMM.\n\nSee also:",
     fill=1,
     linewidth=1,
     decimals=2,
@@ -683,9 +667,7 @@ dashboard.new(
 .addPanel(
   pmmSinglestat.new(
     'CPU  Used',//title
-    description='Show the CPU usage as a percentage for all Exporters on a per-host basis. An Exporter is a software library that provides metrics to PMM.
-
-    See also:',
+    description='Show the CPU usage as a percentage for all Exporters on a per-host basis. An Exporter is a software library that provides metrics to PMM.\n\nSee also:',
     format='percent',
     datasource='Prometheus',
     valueName='current',
@@ -746,9 +728,7 @@ dashboard.new(
 .addPanel(
   singlestat.new(
     'Mem Used',//title
-    description='Shows total Memory Used by Exporters on a per-host basis. An Exporter is a software library that provides metrics to PMM.
-
-    See also:',
+    description='Shows total Memory Used by Exporters on a per-host basis. An Exporter is a software library that provides metrics to PMM.\n\nSee also:',
     format='bytes',
     datasource='Prometheus',
     valueName='current',
@@ -810,9 +790,7 @@ dashboard.new(
 .addPanel(
   singlestat.new(
     'Exporters Running',//title
-    description='Shows the number of Exporters running on a per-host basis. An Exporter is a software library that provides metrics to PMM.
-
-    See also:',
+    description='Shows the number of Exporters running on a per-host basis. An Exporter is a software library that provides metrics to PMM.\n\nSee also:',
     format='short',
     datasource='Prometheus',
     valueName='current',
@@ -944,9 +922,7 @@ dashboard.new(
 .addPanel(
   singlestat.new(
     'Virtual CPUs',//title
-    description='Shows the total number of virtual CPUs on the host. An Exporter is a software library that provides metrics to PMM.
-
-    See also:',
+    description='Shows the total number of virtual CPUs on the host. An Exporter is a software library that provides metrics to PMM.\n\nSee also:',
     format='none',
     datasource='Prometheus',
     valueName='current',
@@ -995,9 +971,7 @@ dashboard.new(
 .addPanel(
   singlestat.new(
     'RAM',//title
-    description='Shows the total amount of RAM of the host. An Exporter is a software library that provides metrics to PMM.
-
-    See also:',
+    description='Shows the total amount of RAM of the host. An Exporter is a software library that provides metrics to PMM.\n\nSee also:',
     format='bytes',
     decimals=2,
     datasource='Prometheus',

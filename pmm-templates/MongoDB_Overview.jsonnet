@@ -244,9 +244,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'Connections',//title
-    description='This shows the number of active connections on the server. Keep in mind the hard limit on the maximum number of connections set by your distribution.
-
-    You can read more about the [connection numbers](https://docs.mongodb.com/manual/administration/analyzing-mongodb-performance/#number-of-connections).',
+    description='This shows the number of active connections on the server. Keep in mind the hard limit on the maximum number of connections set by your distribution.\n\nYou can read more about the [connection numbers](https://docs.mongodb.com/manual/administration/analyzing-mongodb-performance/#number-of-connections).',
     fill=2,
     linewidth=2,
     datasource='Prometheus',
@@ -528,9 +526,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'getLastError Write Time',//title
-    description='This is useful for write-heavy workloads to understand how long it takes to verify writes and how many concurrent writes are occurring.
-
-    You can read more about [getLastError](https://docs.mongodb.com/manual/reference/command/getLastError/).',
+    description='This is useful for write-heavy workloads to understand how long it takes to verify writes and how many concurrent writes are occurring.\n\nYou can read more about [getLastError](https://docs.mongodb.com/manual/reference/command/getLastError/).',
     fill=2,
     linewidth=2,
     datasource='Prometheus',
@@ -574,9 +570,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'getLastError Write Operations',//title
-    description='This is useful for write-heavy workloads to understand how long it takes to verify writes and how many concurrent writes are occurring.
-
-    You can read more about [getLastError](https://docs.mongodb.com/manual/reference/command/getLastError/).',
+    description='This is useful for write-heavy workloads to understand how long it takes to verify writes and how many concurrent writes are occurring.\n\nYou can read more about [getLastError](https://docs.mongodb.com/manual/reference/command/getLastError/).',
     fill=2,
     linewidth=2,
     datasource='Prometheus',
@@ -678,9 +672,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'Page Faults',//title
-    description="Page faults indicate that requests are being processed from disk rather than from memory. This is due to there not being enough memory for the current working set. A low number here isn't generally a concern, but if this counter is consistently high, first check to make sure you have indexes on your collections to support the queries you normally run. If the counter stays high, you should consider increasing the server's memory or look into sharding your database.
-
-    You can read more about [Page Faults](https://docs.mongodb.com/manual/administration/analyzing-mongodb-performance/#page-faults).",
+    description="Page faults indicate that requests are being processed from disk rather than from memory. This is due to there not being enough memory for the current working set. A low number here isn't generally a concern, but if this counter is consistently high, first check to make sure you have indexes on your collections to support the queries you normally run. If the counter stays high, you should consider increasing the server's memory or look into sharding your database.\n\nYou can read more about [Page Faults](https://docs.mongodb.com/manual/administration/analyzing-mongodb-performance/#page-faults).",
     fill=2,
     linewidth=2,
     datasource='Prometheus',

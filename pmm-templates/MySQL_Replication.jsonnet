@@ -209,21 +209,7 @@ dashboard.new(
         "rgba(237, 129, 40, 0.89)",
         "rgba(36, 112, 33, 0.97)"
       ],
-    description='Displays whether the IO Thread is in the running state or not. Applies only to a Slave host. The IO Thread connects to the Master host and reads binary log events, and then copies them locally to a file called the relay log.
-
-    Possible values:
-
-    **Yes** – IO Thread is running and is connected to a Master
-
-    **No** – The IO Thread is not running because it is not yet started, or because an error occured while connecting to the Master
-
-    **Connecting** – The IO Thread is running but is not fully connected to a Master
-
-    **No value** – The host is not configured to be a Slave.
-
-    IO Thread Running is one of the parameters returned by **SHOW SLAVE STATUS** command.
-
-    See also:',
+    description='Displays whether the IO Thread is in the running state or not. Applies only to a Slave host. The IO Thread connects to the Master host and reads binary log events, and then copies them locally to a file called the relay log.\n\nPossible values:\n\n**Yes** – IO Thread is running and is connected to a Master\n\n**No** – The IO Thread is not running because it is not yet started, or because an error occured while connecting to the Master\n\n**Connecting** – The IO Thread is running but is not fully connected to a Master\n\n**No value** – The host is not configured to be a Slave.\n\nIO Thread Running is one of the parameters returned by **SHOW SLAVE STATUS** command.\n\nSee also:',
     format='short',
     height='125px',
     datasource='Prometheus',
@@ -292,15 +278,7 @@ dashboard.new(
         "rgba(237, 129, 40, 0.89)",
         "rgba(36, 112, 33, 0.97)"
       ],
-    description='Displays whether the SQL Thread is in the running state or not. Applies only to a Slave host. The SQL Thread reads the events from the local relay log file and applies them to the Slave host.  Depending on the format of the binary log it can read query statements (STATEMENT format) and re-executes them, or by reading row changes (ROW format) and applying only the changes.
-
-    Possibile values:
-
-    **Yes** – The SQL Thread is running and is applying events from the realy log to the local Slave host
-
-    **No** – The SQL Thread is not running because it is not yet started, or because of an error
-
-    See also:',
+    description='Displays whether the SQL Thread is in the running state or not. Applies only to a Slave host. The SQL Thread reads the events from the local relay log file and applies them to the Slave host.  Depending on the format of the binary log it can read query statements (STATEMENT format) and re-executes them, or by reading row changes (ROW format) and applying only the changes.\n\nPossibile values:\n\n**Yes** – The SQL Thread is running and is applying events from the realy log to the local Slave host\n\n**No** – The SQL Thread is not running because it is not yet started, or because of an error\n\nSee also:',
     format='short',
     height='125px',
     datasource='Prometheus',
@@ -369,11 +347,7 @@ dashboard.new(
       "rgba(237, 129, 40, 0.89)",
       "rgba(245, 54, 54, 0.9)"
       ],
-    description='Displays the number of the last error that the SQL Thread encountered which caused replication to stop.
-
-    One of the more common errors is "Error: 1022 Duplicate Key Entry". In such a case replication is attempting to update a row that already exists on the Slave. The SQL Thread will stop replication in order to avoid data corruption.
-
-    See also:',
+    description='Displays the number of the last error that the SQL Thread encountered which caused replication to stop.\n\nOne of the more common errors is \"Error: 1022 Duplicate Key Entry\". In such a case replication is attempting to update a row that already exists on the Slave. The SQL Thread will stop replication in order to avoid data corruption.\n\nSee also:',
     format='none',
     height='125px',
     datasource='Prometheus',
@@ -424,13 +398,7 @@ dashboard.new(
       "rgba(245, 54, 54, 0.9)"
       ],
       decimals=0,
-    description='Displays whether the host is configured to be in Read Only mode or not.
-
-    Possible values:
-
-    **Yes** – the host blocks client updates except from users who have the SUPER or REPLICATION SLAVE privilege.This kind of configuration is typically used on Slave hosts in a replication environment to prevent client data modification causing inconsistencies and stopping the replication process.
-
-    **No** – the host is not configured for Read Only mode, and will permit local client data modification operations (if the client has appropriate privileges to the database objects).',
+    description='Displays whether the host is configured to be in Read Only mode or not.\n\nPossible values:\n\n**Yes** – the host blocks client updates except from users who have the SUPER or REPLICATION SLAVE privilege.This kind of configuration is typically used on Slave hosts in a replication environment to prevent client data modification causing inconsistencies and stopping the replication process.\n\n**No** – the host is not configured for Read Only mode, and will permit local client data modification operations (if the client has appropriate privileges to the database objects).',
     format='short',
     height='125px',
     datasource='Prometheus',
@@ -480,19 +448,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'MySQL Replication Delay',//title
-    description='Shows the number of seconds the Slave host is delayed in replication applying events compared to when the Master host applied them, denoted by the **Seconds_Behind_Master** value, and only applies to a Slave host. The most common reasons for Slaves to lag their Master are:
-
-    * Network round trip time - High latency links will lead to non-zero replication lag values
-
-    * Single threaded nature of replication channels - Master servers have the advantage of applying changes in parallel, whereas Slaves are only able to apply changes in serial, thus limiting their throughput.  In some cases Group Commit can help but is not always applicable.
-
-    * High number of changed rows or computationally expensive SQL - Depending on the replication format (ROW vs STATEMENT), significant changes to the database through high volume of rows modified, or expensive CPU will all contribute to Slaves lagging behind their Master
-
-    Generally adding more CPU or Disk resources can alleviate replication lag issues, up to a point.
-
-    Ideally a value of 0 is desired, but be aware that **Seconds_Behind_Master** is an integer value and thus rounding is a factor. If you desire greater precision, consider the Percona Toolkit tool pt-heartbeat, as this graph will automatically take into account this tool and then show you greater resolution.
-
-    See also:',
+    description='Shows the number of seconds the Slave host is delayed in replication applying events compared to when the Master host applied them, denoted by the **Seconds_Behind_Master** value, and only applies to a Slave host. The most common reasons for Slaves to lag their Master are:\n\n* Network round trip time - High latency links will lead to non-zero replication lag values\n\n* Single threaded nature of replication channels - Master servers have the advantage of applying changes in parallel, whereas Slaves are only able to apply changes in serial, thus limiting their throughput.  In some cases Group Commit can help but is not always applicable.\n\n* High number of changed rows or computationally expensive SQL - Depending on the replication format (ROW vs STATEMENT), significant changes to the database through high volume of rows modified, or expensive CPU will all contribute to Slaves lagging behind their Master\n\nGenerally adding more CPU or Disk resources can alleviate replication lag issues, up to a point.\n\nIdeally a value of 0 is desired, but be aware that **Seconds_Behind_Master** is an integer value and thus rounding is a factor. If you desire greater precision, consider the Percona Toolkit tool pt-heartbeat, as this graph will automatically take into account this tool and then show you greater resolution.\n\nSee also:',
     fill=2,
     linewidth=2,
     decimals=0,
@@ -556,9 +512,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'Binlogs Size',//title
-    description='Shows the overall size of the binary log files, which can exist on both Masters and Slaves. The binary log (also known as the binlog) contains events that describe database changes: CREATE TABLE, ALTER TABLE, updates, inserts, deletes and other statements or database changes. The binlog is the file that is read by Slaves via their IO Thread process in order to replicate database changes modification on the data and on the table structures. There can be more than one binlog file present depending on the binlog rotation policy adopted (for example using the configuration variables **max_binlog_size** and **expire_logs_days**).
-
-    See also:',
+    description='Shows the overall size of the binary log files, which can exist on both Masters and Slaves. The binary log (also known as the binlog) contains events that describe database changes: CREATE TABLE, ALTER TABLE, updates, inserts, deletes and other statements or database changes. The binlog is the file that is read by Slaves via their IO Thread process in order to replicate database changes modification on the data and on the table structures. There can be more than one binlog file present depending on the binlog rotation policy adopted (for example using the configuration variables **max_binlog_size** and **expire_logs_days**).\n\nSee also:',
     fill=2,
     linewidth=2,
     datasource='Prometheus',
@@ -662,9 +616,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'Binlogs Count',//title
-    description='Shows the overall count of binary log files, which can exist on both Masters and Slaves. The binary log (also known as the binlog) contains events that describe database changes: CREATE TABLE, ALTER TABLE, updates, inserts, deletes and other statements or database changes. The binlog is the file that is read by Slaves via their IO Thread process in order to replicate database changes modification on the data and on the table structures. There can be more than one binlog file present depending on the binlog rotation policy adopted (for example using the configuration variables **max_binlog_size** and **expire_logs_days**).
-
-    See also:',
+    description='Shows the overall count of binary log files, which can exist on both Masters and Slaves. The binary log (also known as the binlog) contains events that describe database changes: CREATE TABLE, ALTER TABLE, updates, inserts, deletes and other statements or database changes. The binlog is the file that is read by Slaves via their IO Thread process in order to replicate database changes modification on the data and on the table structures. There can be more than one binlog file present depending on the binlog rotation policy adopted (for example using the configuration variables **max_binlog_size** and **expire_logs_days**).\n\nSee also:',
     fill=2,
     linewidth=2,
     decimals=0,
@@ -770,9 +722,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'Relay Log Space',//title
-    description='Shows the overall size of the relay log files, and applies only to Slaves. The relay log consists of a set of numbered files containing the events to be executed on a Slave in order to replicate database changes.  As soon as the SQL Thread completes execution of all events in a relay log file, the relay log file is then deleted by MySQL.
-
-    See also:',
+    description='Shows the overall size of the relay log files, and applies only to Slaves. The relay log consists of a set of numbered files containing the events to be executed on a Slave in order to replicate database changes.  As soon as the SQL Thread completes execution of all events in a relay log file, the relay log file is then deleted by MySQL.\n\nSee also:',
     fill=2,
     linewidth=2,
     datasource='Prometheus',

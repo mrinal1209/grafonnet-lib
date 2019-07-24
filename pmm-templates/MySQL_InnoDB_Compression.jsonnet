@@ -452,9 +452,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'Compression Success Ratio',//title
-    description='Shows the ratio between Success InnoDB Compress vs the total InnoDB Compress operations. A high ration indicates that InnoDB compression is being effective and helping to save disk space.
-
-    See also:',
+    description='Shows the ratio between Success InnoDB Compress vs the total InnoDB Compress operations. A high ration indicates that InnoDB compression is being effective and helping to save disk space.\n\nSee also:',
     fill=2,
     linewidth=2,
     decimals=2,
@@ -577,9 +575,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'CPU Core Usage for Uncompression',//title
-    description='Shows the time in seconds spent by InnoDB Uncompression operations.
-
-    See also:',
+    description='Shows the time in seconds spent by InnoDB Uncompression operations.\n\nSee also:',
     fill=2,
     linewidth=2,
     decimals=2,
@@ -649,9 +645,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'Total Used Pages',//title
-    description='Shows the total amount of used compressed pages into the InnoDB Buffer Pool split by page size.
-
-    See also:',
+    description='Shows the total amount of used compressed pages into the InnoDB Buffer Pool split by page size.\n\nSee also:',
     fill=1,
     linewidth=1,
     decimals=0,
@@ -695,9 +689,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     'Total Free Pages',//title
-    description='Shows the total amount of free compressed pages into the InnoDB Buffer Pool split by page size.
-
-    See also:',
+    description='Shows the total amount of free compressed pages into the InnoDB Buffer Pool split by page size.\n\nSee also:',
     fill=1,
     linewidth=1,
     decimals=0,
@@ -748,9 +740,7 @@ dashboard.new(
     .addPanel(
       graphPanel.new(
         'Used Pages (Buffer Pull $buffer)',//title
-        description='Shows the amount of used compressed pages into this InnoDB Buffer Pool instance split by page size.
-
-        See also:',
+        description='Shows the amount of used compressed pages into this InnoDB Buffer Pool instance split by page size.\n\nSee also:',
         fill=2,
         linewidth=2,
         decimals=0,
@@ -792,9 +782,7 @@ dashboard.new(
     .addPanel(
       graphPanel.new(
         'Pages Free (Buffer Pull $buffer)',//title
-        description='Shows the amount of free compressed pages into this InnoDB Buffer Pool instance split by page size.
-
-        See also:',
+        description='Shows the amount of free compressed pages into this InnoDB Buffer Pool instance split by page size.\n\nSee also:',
         fill=2,
         linewidth=2,
         decimals=0,

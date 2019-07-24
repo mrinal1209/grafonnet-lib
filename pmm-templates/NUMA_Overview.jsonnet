@@ -1949,44 +1949,6 @@ dashboard.new(
             "y": 55
        }
     )//52 graph
-    .addPanel(
-      graphPanel.new(
-        'Node $node - Zone $zone',//title
-        fill=1,
-        linewidth=1,
-        decimals=0,
-        datasource='Prometheus',
-        pointradius=2,
-        legend_values=true,
-        legend_min=true,
-        legend_max=true,
-        legend_avg=true,
-        legend_rightSide=true,
-        legend_alignAsTable=true,
-        legend_show=true,
-        legend_sortDesc=true,
-        legend_sort='avg',
-        decimalsY1=0,
-        repeatIteration=1560951716417,
-        repeatDirection='v',
-
-       )
-      .addTarget(
-          prometheus.target(
-            'sum by (node,zone,size) (node_buddyinfo_blocks{node_name=~"$host", node="$node", zone=~"$zone"})',
-            refId='A',
-            interval='$interval',
-            intervalFactor=1,
-            legendFormat='Page Size {{size}}'
-          )
-        ),
-      gridPos={
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 63
-       }
-    )//84 graph
     ,gridPos={
            "h": 1,
            "w": 24,

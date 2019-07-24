@@ -170,6 +170,7 @@ dashboard.new(
     'MMAPv1 Lock Wait Ratio',//title
     format='short',
     datasource='Prometheus',
+    decimals=0,
     editable=true,
     thresholds='90,95',
     height='125px',
@@ -206,6 +207,7 @@ dashboard.new(
   singlestat.new(
     'MMAPv1 Write Lock Time',//title
     format='ms',
+    decimals=0,
     datasource='Prometheus',
     editable=true,
     thresholds='90,95',

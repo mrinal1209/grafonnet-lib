@@ -56,9 +56,11 @@
     editable=null,
     timeFrom=null,
     tableColumn='',
+    hideTimeOverride=null,
   )::
     {
       [if timeFrom != null then 'timeFrom']: timeFrom,
+      [if hideTimeOverride != null then 'hideTimeOverride']: hideTimeOverride,
       tableColumn: tableColumn,
       [if height != null then 'height']: height,
       [if editable != null then 'editable']: editable,

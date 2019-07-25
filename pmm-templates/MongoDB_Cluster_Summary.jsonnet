@@ -149,6 +149,7 @@ dashboard.new(
     valueName='current',
     decimals=0,
     thresholds='',
+    hideTimeOverride=true,
     colors=[
       "rgba(245, 54, 54, 0.9)",
       "rgba(237, 129, 40, 0.89)",
@@ -184,6 +185,7 @@ dashboard.new(
     valueName='current',
     decimals=0,
     thresholds='',
+    hideTimeOverride=true,
     colors=[
       "rgba(245, 54, 54, 0.9)",
       "rgba(237, 129, 40, 0.89)",
@@ -219,6 +221,7 @@ dashboard.new(
     valueName='current',
     decimals=0,
     thresholds='',
+    hideTimeOverride=true,
     colors=[
       "rgba(245, 54, 54, 0.9)",
       "rgba(237, 129, 40, 0.89)",
@@ -254,6 +257,7 @@ dashboard.new(
     valueName='current',
     decimals=0,
     thresholds='',
+    hideTimeOverride=true,
     colors=[
       "rgba(245, 54, 54, 0.9)",
       "rgba(237, 129, 40, 0.89)",

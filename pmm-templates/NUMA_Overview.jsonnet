@@ -1278,7 +1278,7 @@ dashboard.new(
              )
       .addTarget(
           prometheus.target(
-           'avg_over_time(node_memory_numa_KernelStack{node_name=~"$host"}[$interval]))',
+           'avg_over_time(node_memory_numa_KernelStack{node_name=~"$host"}[$interval])',
            refId='F',
            interval='$interval',
            legendFormat='KernelStack',

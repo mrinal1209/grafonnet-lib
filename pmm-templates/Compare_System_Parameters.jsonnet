@@ -14,7 +14,7 @@ local tablePanel = grafana.tablePanel;
 dashboard.new(
   'Compare System Parameters',
   time_from='now-12h',
-  editable=true,
+  editable=false,
   refresh= "1m",
   graphTooltip='shared_crosshair',
   schemaVersion=18,
@@ -24,6 +24,10 @@ dashboard.new(
   uid="000000205",
   gnetId=405,
   description='Dashboard to view multiple servers',
+  timepicker = timepicker.new(
+    hidden=false,
+    now=true,
+  )
 )
 .addAnnotation(
   grafana.annotation.datasource(
@@ -35,7 +39,9 @@ dashboard.new(
     builtIn=1,
     iconColor='#e0752d',
     limit=100,
-    tags = ['pmm_annotation'],
+    tags = ["pmm_annotation",
+            "$host",
+            "$service"],
   )
 )
 .addAnnotation(
@@ -55,7 +61,7 @@ dashboard.new(
     'Query Analytics',
     ['QAN'],
     type='link',
-    url='/graph/dashboard/db/_pmm-query-analytics',
+    url='/graph/d/7w6Q3PJmz/pmm-query-analytics',
     keepTime=true,
     includeVars=true,
     asDropdown=false,
@@ -98,14 +104,6 @@ dashboard.new(
   grafana.link.dashboards(
     'HA',
     ['HA'],
-    keepTime=true,
-    includeVars=true,
-  )
-)
-.addLink(
-  grafana.link.dashboards(
-    'Cloud',
-    ['Cloud'],
     keepTime=true,
     includeVars=true,
   )
@@ -1127,7 +1125,7 @@ dashboard.new(
 )//80 singlestat
 .addPanel(
   singlestat.new(
-    'title": "$host - RAM',//title
+    title='$host - RAM',//title
     format='bytes',
     datasource='Prometheus',
     valueName='current',
@@ -1165,7 +1163,6 @@ dashboard.new(
   },
   style=null,
 )//432 singlestat
-//here
 .addPanel(
     row.new(
       title='',
@@ -1186,6 +1183,7 @@ dashboard.new(
     decimals=2,
     datasource='Prometheus',
     pointradius=5,
+    paceLength=10,
     legend_values=true,
     legend_min=true,
     legend_max=true,
@@ -1217,6 +1215,7 @@ dashboard.new(
                 "type": "dashboard"
             }
     ],
+    min=0,
   )
   .addTarget(
       prometheus.target(
@@ -1256,6 +1255,7 @@ dashboard.new(
     decimals=2,
     datasource='Prometheus',
     pointradius=5,
+    paceLength=10,
     legend_values=true,
     legend_min=true,
     legend_max=true,
@@ -1267,8 +1267,8 @@ dashboard.new(
     legend_sortDesc=true,
     editable=true,
     maxPerRow=6,
-    repeat='host',
     format='short',
+    min=0,
     aliasColors={
       "Allocated": "#E0752D",
        "CPU Load": "#64B0C8",
@@ -1336,19 +1336,22 @@ dashboard.new(
     '$host - Load Average',//title
     fill=1,
     linewidth=2,
-    decimals=2,
     datasource='Prometheus',
     pointradius=5,
+    paceLength=10,
     legend_values=true,
     legend_min=true,
     legend_max=true,
     legend_avg=true,
     legend_alignAsTable=true,
     legend_show=true,
+    nullPointMode='connected',
     editable=true,
     maxPerRow=6,
     repeat='host',
     format='short',
+    minY1=0,
+    value_type="cumulative",
     aliasColors={
       "VCPUs": "#fce2de",
       "mdb101 1m": "#bf1b00",
@@ -1401,6 +1404,7 @@ dashboard.new(
     linewidth=2,
     datasource='Prometheus',
     pointradius=5,
+    paceLength=10,
     legend_values=true,
     legend_min=true,
     legend_max=true,
@@ -1409,7 +1413,10 @@ dashboard.new(
     legend_show=true,
     editable=true,
     maxPerRow=6,
+    nullPointMode='connected',
+    value_type='cumulative',
     format='short',
+    minY1=0,
     aliasColors={
       "VCPUs": "#fce2de",
       "mdb101 1m": "#bf1b00",
@@ -1498,10 +1505,11 @@ dashboard.new(
   graphPanel.new(
     '$host - CPU Usage',//title
     fill=6,
-    linewidth=2,
+    linewidth=1,
     decimals=2,
     datasource='Prometheus',
     pointradius=5,
+    paceLength=10,
     legend_values=true,
     legend_min=true,
     legend_max=true,
@@ -1512,8 +1520,12 @@ dashboard.new(
     legend_hideZero=true,
     legend_show=true,
     editable=true,
+    stack=true,
     maxPerRow=6,
     repeat='host',
+    decimalsY1=1,
+    maxY1='1',
+    minY1=0,
     aliasColors={
       "Max Core Utilization": "#bf1b00",
       "iowait": "#ef843c",

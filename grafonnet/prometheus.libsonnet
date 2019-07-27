@@ -11,6 +11,7 @@
     calculatedInterval=null,
     step=null,
     hide = null,
+    metric=null,
   ):: {
     [if datasource != null then 'datasource']: datasource,
     expr: expr,
@@ -23,5 +24,6 @@
     [if legendFormat != null then 'legendFormat']: legendFormat,
     [if calculatedInterval != null then 'calculatedInterval']: calculatedInterval,
     [if step != null then 'step']: step,
+    [if metric != null then 'metric']: metric,
   },
 }

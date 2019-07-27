@@ -1,6 +1,7 @@
 {
   new(
     title='',
+    description=null,
     span=null,
     mode='markdown',
     datasource=null,
@@ -14,6 +15,7 @@
   )::
     {
       [if transparent != null then 'transparent']: transparent,
+      [if description != null then 'description']: description,
       [if datasource != null then 'datasource']: datasource,
     //  [if error != null then 'error']: error,
       [if height != null then 'height']: height,

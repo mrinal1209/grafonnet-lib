@@ -1372,7 +1372,6 @@ dashboard.new(
               "type": "dashboard",
             }
     ],
-    repeatIteration=1553870190718,
   )
   .addTarget(
       prometheus.target(
@@ -1750,7 +1749,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     '$host - Interrupts',//title
-    fill=6,
+    fill=2,
     linewidth=2,
     decimals=2,
     datasource='Prometheus',
@@ -1809,7 +1808,7 @@ dashboard.new(
     "y": 43,
   },
   style=null,
-)//435 graph
+)//436 graph
 .addPanel(
     row.new(
       title='',
@@ -1881,7 +1880,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     '$host - Context Switches',//title
-    fill=6,
+    fill=2,
     linewidth=2,
     datasource='Prometheus',
     pointradius=5,
@@ -2659,3 +2658,1214 @@ dashboard.new(
     },
     style=null,
 )//319 row
+.addPanel(
+  graphPanel.new(
+    '$host - Free Space',//title
+    fill=0,
+    decimals=2,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_values=true,
+    legend_min=true,
+    legend_max=true,
+    legend_avg=true,
+    legend_alignAsTable=true,
+    legend_show=true,
+    editable=true,
+    repeat='host',
+    maxPerRow=6,
+    stack=true,
+    value_type='cumulative',
+    decimalsY1=2,
+    minY1=0,
+    formatY1='bytes',
+    links=[
+      {
+        "dashUri": "db/disk-space",
+        "dashboard": "Disk Space",
+        "includeVars": true,
+        "keepTime": true,
+        "targetBlank": true,
+        "title": "Disk Space",
+        "type": "dashboard"
+        }
+     ],
+  )
+  .addTarget(
+      prometheus.target(
+        'node_filesystem_free_bytes{node_name=~"$host", fstype!~"rootfs|selinuxfs|autofs|rpc_pipefs|tmpfs"} ',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='{{mountpoint}}',
+        step=1200,
+      )
+    ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 0,
+    "y": 97,
+  },
+  style=null,
+)//156 graph
+.addPanel(
+  graphPanel.new(
+    '$host - Free Space',//title
+    fill=0,
+    decimals=2,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_values=true,
+    legend_min=true,
+    legend_max=true,
+    legend_avg=true,
+    legend_alignAsTable=true,
+    legend_show=true,
+    editable=true,
+    repeatPanelId=156,
+    repeatIteration=1553870190718,
+    maxPerRow=6,
+    stack=true,
+    value_type='cumulative',
+    decimalsY1=2,
+    minY1=0,
+    formatY1='bytes',
+    links=[
+      {
+        "dashUri": "db/disk-space",
+        "dashboard": "Disk Space",
+        "includeVars": true,
+        "keepTime": true,
+        "targetBlank": true,
+        "title": "Disk Space",
+        "type": "dashboard"
+        }
+     ],
+  )
+  .addTarget(
+      prometheus.target(
+        'node_filesystem_free_bytes{node_name=~"$host", fstype!~"rootfs|selinuxfs|autofs|rpc_pipefs|tmpfs"} ',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='{{mountpoint}}',
+        step=1200,
+      )
+    ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 12,
+    "y": 97,
+  },
+  style=null,
+)//442 graph
+.addPanel(
+    row.new(
+      title='Disk performance',
+    ),
+    gridPos={
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 104,
+    },
+    style=null,
+)//302 row
+.addPanel(
+  text.new(
+    content='<h1><i><font color=#5991A7><b><center>Disk performance</center></b></font></i></h1>',
+    height='20px',
+    mode='html',
+    transparent=true,
+  ),
+  gridPos={
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 105,
+      },
+  style=null,
+)//104 text
+.addPanel(
+    row.new(
+      title='',
+    ),
+    gridPos={
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 107,
+    },
+    style=null,
+)//300 row
+.addPanel(
+  graphPanel.new(
+    '$host - I/O Activity',//title
+    fill=2,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_values=true,
+    legend_min=true,
+    legend_max=true,
+    legend_avg=true,
+    legend_alignAsTable=true,
+    legend_show=true,
+    legend_sort='avg',
+    legend_sortDesc=true,
+    editable=true,
+    repeat='host',
+    maxPerRow=6,
+    min=0,
+    formatY1='Bps',
+    formatY2='bytes',
+    links=[
+        {
+          "dashUri": "db/disk-performance",
+          "dashboard": "Disk Performance",
+          "includeVars": true,
+          "keepTime": true,
+          "targetBlank": true,
+          "title": "Disk Performance",
+          "type": "dashboard"
+        }
+     ],
+  )
+  .addTarget(
+      prometheus.target(
+        'rate(node_vmstat_pgpgin{node_name=~"$host"}[$interval]) * 1024 or irate(node_vmstat_pgpgin{node_name=~"$host"}[5m]) * 1024',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='Page In',
+        calculatedInterval='2s',
+        step=300,
+      )
+    )
+  .addTarget(
+        prometheus.target(
+          'rate(node_vmstat_pgpgout{node_name=~"$host"}[$interval]) * 1024 or irate(node_vmstat_pgpgout{node_name=~"$host"}[5m]) * 1024',
+          interval='$interval',
+          intervalFactor=1,
+          legendFormat='Page Out',
+          calculatedInterval='2s',
+          step=300,
+        )
+      ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 0,
+    "y": 108,
+  },
+  style=null,
+)//153 graph
+.addPanel(
+  graphPanel.new(
+    '$host - I/O Activity',//title
+    fill=2,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_values=true,
+    legend_min=true,
+    legend_max=true,
+    legend_avg=true,
+    legend_alignAsTable=true,
+    legend_show=true,
+    legend_sort='avg',
+    legend_sortDesc=true,
+    editable=true,
+    repeatIteration=1553870190718,
+    repeatPanelId=153,
+    maxPerRow=6,
+    min=0,
+    formatY1='Bps',
+    formatY2='bytes',
+    links=[
+        {
+          "dashUri": "db/disk-performance",
+          "dashboard": "Disk Performance",
+          "includeVars": true,
+          "keepTime": true,
+          "targetBlank": true,
+          "title": "Disk Performance",
+          "type": "dashboard"
+        }
+     ],
+  )
+  .addTarget(
+      prometheus.target(
+        'rate(node_vmstat_pgpgin{node_name=~"$host"}[$interval]) * 1024 or irate(node_vmstat_pgpgin{node_name=~"$host"}[5m]) * 1024',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='Page In',
+        calculatedInterval='2s',
+        step=300,
+      )
+    )
+  .addTarget(
+        prometheus.target(
+          'rate(node_vmstat_pgpgout{node_name=~"$host"}[$interval]) * 1024 or irate(node_vmstat_pgpgout{node_name=~"$host"}[5m]) * 1024',
+          interval='$interval',
+          intervalFactor=1,
+          legendFormat='Page Out',
+          calculatedInterval='2s',
+          step=300,
+        )
+      ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 12,
+    "y": 108,
+  },
+  style=null,
+)//443 graph
+.addPanel(
+    row.new(
+      title='',
+    ),
+    gridPos={
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 115,
+    },
+    style=null,
+)//298 row
+.addPanel(
+  graphPanel.new(
+    '$host - Disk Operations',//title
+    description='Shows amount of physical IOs (reads and writes) different devices are serving. Spikes in number of IOs served often corresponds to performance problems due to IO subsystem overload.',
+    fill=1,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_show=true,
+    editable=true,
+    nullPointMode='connected',
+    repeat='host',
+    maxPerRow=6,
+    value_type='cumulative',
+    formatY1='iops',
+    links=[
+        {
+          "dashUri": "db/disk-performance",
+          "dashboard": "Disk Performance",
+          "includeVars": true,
+          "keepTime": true,
+          "targetBlank": true,
+          "title": "Disk Performance",
+          "type": "dashboard"
+        }
+     ],
+  )
+  .addTarget(
+      prometheus.target(
+        "rate(node_disk_reads_completed_total{node_name=~'$host'}[$interval]) or irate(node_disk_reads_completed_total{node_name=~'$host'}[5m])",
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='Reads: {{device}}',
+        step=2400,
+      )
+    )
+  .addTarget(
+        prometheus.target(
+          "rate(node_disk_writes_completed_total{node_name=~'$host'}[$interval]) or irate(node_disk_writes_completed_total{node_name=~'$host'}[5m])",
+          interval='$interval',
+          intervalFactor=1,
+          legendFormat='Writes: {{device}}',
+          step=1200,
+        )
+      ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 0,
+    "y": 116,
+  },
+  style=null,
+)//14 graph
+.addPanel(
+  graphPanel.new(
+    '$host - Disk Operations',//title
+    description='Shows amount of physical IOs (reads and writes) different devices are serving. Spikes in number of IOs served often corresponds to performance problems due to IO subsystem overload.',
+    fill=1,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_show=true,
+    editable=true,
+    nullPointMode='connected',
+    repeatIteration=1553870190718,
+    repeatPanelId=14,
+    maxPerRow=6,
+    value_type='cumulative',
+    formatY1='iops',
+    links=[
+        {
+          "dashUri": "db/disk-performance",
+          "dashboard": "Disk Performance",
+          "includeVars": true,
+          "keepTime": true,
+          "targetBlank": true,
+          "title": "Disk Performance",
+          "type": "dashboard"
+        }
+     ],
+  )
+  .addTarget(
+      prometheus.target(
+        "rate(node_disk_reads_completed_total{node_name=~'$host'}[$interval]) or irate(node_disk_reads_completed_total{node_name=~'$host'}[5m])",
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='Reads: {{device}}',
+        step=2400,
+      )
+    )
+  .addTarget(
+        prometheus.target(
+          "rate(node_disk_writes_completed_total{node_name=~'$host'}[$interval]) or irate(node_disk_writes_completed_total{node_name=~'$host'}[5m])",
+          interval='$interval',
+          intervalFactor=1,
+          legendFormat='Writes: {{device}}',
+          step=1200,
+        )
+      ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 12,
+    "y": 116,
+  },
+  style=null,
+)//444 graph
+.addPanel(
+    row.new(
+      title='',
+    ),
+    gridPos={
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 123,
+    },
+    style=null,
+)//296 row
+.addPanel(
+  graphPanel.new(
+    '$host - Disk Bandwidth',//title
+    description='Shows volume of reads and writes the storage is handling. This can be better measure of IO capacity usage for network attached and SSD storage as it is often bandwidth limited.  Amount of data being written to the disk can be used to estimate Flash storage life time.',
+    fill=2,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_show=true,
+    editable=true,
+    nullPointMode='connected',
+    repeat='host',
+    maxPerRow=6,
+    value_type='cumulative',
+    formatY1='Bps',
+    links=[
+        {
+          "dashUri": "db/disk-performance",
+          "dashboard": "Disk Performance",
+          "includeVars": true,
+          "keepTime": true,
+          "targetBlank": false,
+          "title": "Disk Performance",
+          "type": "dashboard"
+        }
+     ],
+  )
+  .addTarget(
+      prometheus.target(
+        'rate(node_disk_read_bytes_total{node_name=~"$host"}[$interval]) or irate(node_disk_read_bytes_total{node_name=~"$host"}[5m])',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='Reads: {{device}}',
+        step=2400,
+      )
+    )
+  .addTarget(
+        prometheus.target(
+          'rate(node_disk_written_bytes_total{node_name=~"$host"}[$interval]) or irate(node_disk_written_bytes_total{node_name=~"$host"}[5m])',
+          interval='$interval',
+          intervalFactor=1,
+          legendFormat='Writes: {{device}}',
+          step=2400,
+        )
+      ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 0,
+    "y": 124,
+  },
+  style=null,
+)//18 graph
+.addPanel(
+  graphPanel.new(
+    '$host - Disk Bandwidth',//title
+    description='Shows volume of reads and writes the storage is handling. This can be better measure of IO capacity usage for network attached and SSD storage as it is often bandwidth limited.  Amount of data being written to the disk can be used to estimate Flash storage life time.',
+    fill=2,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_show=true,
+    editable=true,
+    nullPointMode='connected',
+    repeatIteration=1553870190718,
+    repeatPanelId=18,
+    maxPerRow=6,
+    value_type='cumulative',
+    formatY1='Bps',
+    links=[
+        {
+          "dashUri": "db/disk-performance",
+          "dashboard": "Disk Performance",
+          "includeVars": true,
+          "keepTime": true,
+          "targetBlank": false,
+          "title": "Disk Performance",
+          "type": "dashboard"
+        }
+     ],
+  )
+  .addTarget(
+      prometheus.target(
+        'rate(node_disk_read_bytes_total{node_name=~"$host"}[$interval]) or irate(node_disk_read_bytes_total{node_name=~"$host"}[5m])',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='Reads: {{device}}',
+        step=2400,
+      )
+    )
+  .addTarget(
+        prometheus.target(
+          'rate(node_disk_written_bytes_total{node_name=~"$host"}[$interval]) or irate(node_disk_written_bytes_total{node_name=~"$host"}[5m])',
+          interval='$interval',
+          intervalFactor=1,
+          legendFormat='Writes: {{device}}',
+          step=2400,
+        )
+      ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 12,
+    "y": 124,
+  },
+  style=null,
+)//445 graph
+.addPanel(
+    row.new(
+      title='',
+    ),
+    gridPos={
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 131,
+    },
+    style=null,
+)//402 row
+.addPanel(
+  graphPanel.new(
+    '$host - Disk IO Utilization',//title
+    description='Shows disk Utilization as percent of the time when there was at least one IO request in flight. It is designed to match utilization available in iostat tool. It is not very good measure of true IO Capacity Utilization. Consider looking at IO latency and Disk Load Graphs instead.',
+    fill=1,
+    decimals=2,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_avg=true,
+    legend_max=true,
+    legend_min=true,
+    legend_show=true,
+    legend_values=true,
+    editable=true,
+    nullPointMode='connected',
+    repeat='host',
+    maxPerRow=6,
+    value_type='cumulative',
+    formatY1='percentunit',
+    maxY1='1.1',
+    minY1='0',
+    links=[
+        {
+          "dashUri": "db/disk-performance",
+          "dashboard": "Disk Performance",
+          "includeVars": true,
+          "keepTime": true,
+          "targetBlank": true,
+          "title": "Disk Performance",
+          "type": "dashboard"
+        }
+     ],
+  )
+  .addTarget(
+      prometheus.target(
+        'rate(node_disk_io_time_seconds_total{node_name=~"$host"}[$interval]) or irate(node_disk_io_time_seconds_total{node_name=~"$host"}[5m])',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='{{device}}',
+      )
+      ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 0,
+    "y": 132,
+  },
+  style=null,
+)//19 graph
+.addPanel(
+  graphPanel.new(
+    '$host - Disk IO Utilization',//title
+    description='Shows disk Utilization as percent of the time when there was at least one IO request in flight. It is designed to match utilization available in iostat tool. It is not very good measure of true IO Capacity Utilization. Consider looking at IO latency and Disk Load Graphs instead.',
+    fill=1,
+    decimals=2,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_avg=true,
+    legend_max=true,
+    legend_min=true,
+    legend_show=true,
+    legend_values=true,
+    editable=true,
+    nullPointMode='connected',
+    repeatIteration=1553870190718,
+    repeatPanelId=19,
+    maxPerRow=6,
+    value_type='cumulative',
+    formatY1='percentunit',
+    maxY1='1.1',
+    minY1='0',
+    links=[
+        {
+          "dashUri": "db/disk-performance",
+          "dashboard": "Disk Performance",
+          "includeVars": true,
+          "keepTime": true,
+          "targetBlank": true,
+          "title": "Disk Performance",
+          "type": "dashboard"
+        }
+     ],
+  )
+  .addTarget(
+      prometheus.target(
+        'rate(node_disk_io_time_seconds_total{node_name=~"$host"}[$interval]) or irate(node_disk_io_time_seconds_total{node_name=~"$host"}[5m])',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='{{device}}',
+      )
+      ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 12,
+    "y": 132,
+  },
+  style=null,
+)//446 graph
+.addPanel(
+    row.new(
+      title='',
+    ),
+    gridPos={
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 139,
+    },
+    style=null,
+)//400 row
+.addPanel(
+  graphPanel.new(
+    '$host - Disk Latency',//title
+    description='Shows average latency for Reads and Writes IO Devices.  Higher than typical latency for highly loaded storage indicates saturation (overload) and is frequent cause of performance problems.  Higher than normal latency also can indicate internal storage problems.',
+    fill=2,
+    decimals=2,
+    linewidth=2,
+    lines=false,
+    points=true,
+    datasource='Prometheus',
+    pointradius=1,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_avg=true,
+    legend_hideEmpty=true,
+    legend_hideZero=true,
+    legend_max=true,
+    legend_min=true,
+    legend_show=true,
+    legend_values=true,
+    editable=true,
+    repeat='host',
+    maxPerRow=6,
+    format='s',
+    logBase1Y=2,
+    minY2=0,
+  )
+  .addTarget(
+      prometheus.target(
+        '(rate(node_disk_read_time_seconds_total{node_name=~"$host"}[$interval]) /
+        rate(node_disk_reads_completed_total{node_name=~"$host"}[$interval])) or
+        (irate(node_disk_read_time_seconds_total{node_name=~"$host"}[5m]) /
+        irate(node_disk_reads_completed_total{node_name=~"$host"}[5m]))
+        or avg_over_time(aws_rds_read_latency_average{node_name=~"$host"}[$interval])/1000 or
+        avg_over_time(aws_rds_read_latency_average{node_name=~"$host"}[5m])/1000',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='Read: {{ device }}',
+        calculatedInterval='2m',
+        step=300,
+      )
+      )
+  .addTarget(
+          prometheus.target(
+            '(rate(node_disk_write_time_seconds_total{node_name=~"$host"}[$interval]) /
+            rate(node_disk_writes_completed_total{node_name=~"$host"}[$interval])) or
+            (irate(node_disk_write_time_seconds_total{node_name=~"$host"}[5m]) /
+            irate(node_disk_writes_completed_total{node_name=~"$host"}[5m]))
+            or (avg_over_time(aws_rds_write_latency_average{node_name=~"$host"}[$interval])/1000 or
+            avg_over_time(aws_rds_write_latency_average{node_name=~"$host"}[5m])/1000)',
+            interval='$interval',
+            intervalFactor=1,
+            legendFormat='Write: {{ device }}',
+            calculatedInterval='2m',
+            step=300,
+          )
+          ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 0,
+    "y": 140,
+    },
+  style=null,
+)//159 graph
+.addPanel(
+  graphPanel.new(
+    '$host - Disk Latency',//title
+    description='Shows average latency for Reads and Writes IO Devices.  Higher than typical latency for highly loaded storage indicates saturation (overload) and is frequent cause of performance problems.  Higher than normal latency also can indicate internal storage problems.',
+    fill=2,
+    decimals=2,
+    linewidth=2,
+    lines=false,
+    points=true,
+    datasource='Prometheus',
+    pointradius=1,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_avg=true,
+    legend_hideEmpty=true,
+    legend_hideZero=true,
+    legend_max=true,
+    legend_min=true,
+    legend_show=true,
+    legend_values=true,
+    editable=true,
+    repeatIteration=1553870190718,
+    repeatPanelId=159,
+    maxPerRow=6,
+    format='s',
+    logBase1Y=2,
+    minY2=0,
+  )
+  .addTarget(
+      prometheus.target(
+        '(rate(node_disk_read_time_seconds_total{node_name=~"$host"}[$interval]) /
+        rate(node_disk_reads_completed_total{node_name=~"$host"}[$interval])) or
+        (irate(node_disk_read_time_seconds_total{node_name=~"$host"}[5m]) /
+        irate(node_disk_reads_completed_total{node_name=~"$host"}[5m]))
+        or avg_over_time(aws_rds_read_latency_average{node_name=~"$host"}[$interval])/1000 or
+        avg_over_time(aws_rds_read_latency_average{node_name=~"$host"}[5m])/1000',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='Read: {{ device }}',
+        calculatedInterval='2m',
+        step=300,
+      )
+      )
+  .addTarget(
+          prometheus.target(
+            '(rate(node_disk_write_time_seconds_total{node_name=~"$host"}[$interval]) /
+            rate(node_disk_writes_completed_total{node_name=~"$host"}[$interval])) or
+            (irate(node_disk_write_time_seconds_total{node_name=~"$host"}[5m]) /
+            irate(node_disk_writes_completed_total{node_name=~"$host"}[5m]))
+            or (avg_over_time(aws_rds_write_latency_average{node_name=~"$host"}[$interval])/1000 or
+            avg_over_time(aws_rds_write_latency_average{node_name=~"$host"}[5m])/1000)',
+            interval='$interval',
+            intervalFactor=1,
+            legendFormat='Write: {{ device }}',
+            calculatedInterval='2m',
+            step=300,
+          )
+          ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 12,
+    "y": 140,
+    },
+  style=null,
+)//447 graph
+.addPanel(
+    row.new(
+      title='',
+    ),
+    gridPos={
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 147,
+    },
+    style=null,
+)//398 row
+.addPanel(
+  graphPanel.new(
+    '$host - Disk Load',//title
+    description='Shows how much disk was loaded for reads or writes as average number of outstanding requests at different period of time.  High disk load is a good measure of actual storage utilization. Different storage types handle load differently - some will show latency increases on low loads others can handle higher load with no problems.',
+    fill=2,
+    decimals=2,
+    linewidth=2,
+    lines=false,
+    points=true,
+    datasource='Prometheus',
+    pointradius=1,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_avg=true,
+    legend_hideEmpty=false,
+    legend_hideZero=true,
+    legend_max=true,
+    legend_min=true,
+    legend_show=true,
+    legend_values=true,
+    editable=true,
+    repeat='host',
+    maxPerRow=6,
+    min=0,
+  )
+  .addTarget(
+      prometheus.target(
+        'rate(node_disk_read_time_seconds_total{node_name=~"$host"}[$interval]) or
+        irate(node_disk_read_time_seconds_total{node_name=~"$host"}[5m])',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='Read: {{ device }}',
+        calculatedInterval='2m',
+        step=300,
+      )
+      )
+  .addTarget(
+          prometheus.target(
+            'rate(node_disk_write_time_seconds_total{node_name=~"$host"}[$interval]) or
+            irate(node_disk_write_time_seconds_total{node_name=~"$host"}[5m])',
+            interval='$interval',
+            intervalFactor=1,
+            legendFormat='Write: {{ device }}',
+            calculatedInterval='2m',
+            step=300,
+          )
+          ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 0,
+    "y": 148,
+    },
+  style=null,
+)//162 graph
+.addPanel(
+  graphPanel.new(
+    '$host - Disk Load',//title
+    description='Shows how much disk was loaded for reads or writes as average number of outstanding requests at different period of time.  High disk load is a good measure of actual storage utilization. Different storage types handle load differently - some will show latency increases on low loads others can handle higher load with no problems.',
+    fill=2,
+    decimals=2,
+    linewidth=2,
+    lines=false,
+    points=true,
+    datasource='Prometheus',
+    pointradius=1,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_avg=true,
+    legend_hideEmpty=false,
+    legend_hideZero=true,
+    legend_max=true,
+    legend_min=true,
+    legend_show=true,
+    legend_values=true,
+    editable=true,
+    repeatIteration=1553870190718,
+    repeatPanelId=162,
+    maxPerRow=6,
+    min=0,
+  )
+  .addTarget(
+      prometheus.target(
+        'rate(node_disk_read_time_seconds_total{node_name=~"$host"}[$interval]) or
+        irate(node_disk_read_time_seconds_total{node_name=~"$host"}[5m])',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='Read: {{ device }}',
+        calculatedInterval='2m',
+        step=300,
+      )
+      )
+  .addTarget(
+          prometheus.target(
+            'rate(node_disk_write_time_seconds_total{node_name=~"$host"}[$interval]) or
+            irate(node_disk_write_time_seconds_total{node_name=~"$host"}[5m])',
+            interval='$interval',
+            intervalFactor=1,
+            legendFormat='Write: {{ device }}',
+            calculatedInterval='2m',
+            step=300,
+          )
+          ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 12,
+    "y": 148,
+    },
+  style=null,
+)//448 graph
+.addPanel(
+    row.new(
+      title='Network',
+    ),
+    gridPos={
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 155,
+    },
+    style=null,
+)//396 row
+.addPanel(
+  text.new(
+    content='<h1><i><font color=#5991A7><b><center>Network</center></b></font></i></h1>',
+    height='20px',
+    mode='html',
+    transparent=true,
+  ),
+  gridPos={
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 156,
+      },
+  style=null,
+)//103 text
+.addPanel(
+    row.new(
+      title='',
+    ),
+    gridPos={
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 158,
+    },
+    style=null,
+)//394 row
+.addPanel(
+  graphPanel.new(
+    'Network Traffic',//title
+    fill=2,
+    decimals=2,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_avg=true,
+    legend_max=true,
+    legend_min=true,
+    legend_show=true,
+    legend_values=true,
+    nullPointMode='connected',
+    editable=true,
+    repeat='host',
+    maxPerRow=6,
+    value_type='cumulative',
+    formatY1='Bps',
+    labelY1='bits out (-) / bits in (+)',
+    links=[
+        {
+          "dashUri": "db/system-overview",
+          "dashboard": "System Overview",
+          "includeVars": true,
+          "keepTime": true,
+          "targetBlank": true,
+          "title": "System Overview",
+          "type": "dashboard"
+        }
+      ],
+  )
+  .addSeriesOverride(
+      {
+          "alias": "Outbound",
+          "transform": "negative-Y"
+        }
+        )
+  .addTarget(
+      prometheus.target(
+        'sum(rate(node_network_receive_bytes_total{node_name=~"$host", device!="lo"}[$interval])) or
+        sum(irate(node_network_receive_bytes_total{node_name=~"$host", device!="lo"}[5m])) or
+        sum(max_over_time(rdsosmetrics_network_rx{node_name=~"$host"}[$interval])) or
+        sum(max_over_time(rdsosmetrics_network_rx{node_name=~"$host"}[5m])) ',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='Inbound',
+      )
+      )
+  .addTarget(
+          prometheus.target(
+            'sum(rate(node_network_transmit_bytes_total{node_name=~"$host", device!="lo"}[$interval])) or
+            sum(irate(node_network_transmit_bytes_total{node_name=~"$host", device!="lo"}[5m])) or
+            sum(max_over_time(rdsosmetrics_network_tx{node_name=~"$host"}[$interval])) or
+            sum(max_over_time(rdsosmetrics_network_tx{node_name=~"$host"}[5m]))',
+            interval='$interval',
+            intervalFactor=1,
+            legendFormat='Outbound',
+          )
+          ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 0,
+    "y": 159,
+    },
+  style=null,
+)//12 graph
+.addPanel(
+  graphPanel.new(
+    'Network Traffic',//title
+    fill=2,
+    decimals=2,
+    linewidth=2,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_avg=true,
+    legend_max=true,
+    legend_min=true,
+    legend_show=true,
+    legend_values=true,
+    nullPointMode='connected',
+    editable=true,
+    repeatIteration=1553870190718,
+    repeatPanelId=12,
+    maxPerRow=6,
+    value_type='cumulative',
+    formatY1='Bps',
+    labelY1='bits out (-) / bits in (+)',
+    links=[
+        {
+          "dashUri": "db/system-overview",
+          "dashboard": "System Overview",
+          "includeVars": true,
+          "keepTime": true,
+          "targetBlank": true,
+          "title": "System Overview",
+          "type": "dashboard"
+        }
+      ],
+  )
+  .addSeriesOverride(
+      {
+          "alias": "Outbound",
+          "transform": "negative-Y"
+        }
+        )
+  .addTarget(
+      prometheus.target(
+        'sum(rate(node_network_receive_bytes_total{node_name=~"$host", device!="lo"}[$interval])) or
+        sum(irate(node_network_receive_bytes_total{node_name=~"$host", device!="lo"}[5m])) or
+        sum(max_over_time(rdsosmetrics_network_rx{node_name=~"$host"}[$interval])) or
+        sum(max_over_time(rdsosmetrics_network_rx{node_name=~"$host"}[5m])) ',
+        interval='$interval',
+        intervalFactor=1,
+        legendFormat='Inbound',
+      )
+      )
+  .addTarget(
+          prometheus.target(
+            'sum(rate(node_network_transmit_bytes_total{node_name=~"$host", device!="lo"}[$interval])) or
+            sum(irate(node_network_transmit_bytes_total{node_name=~"$host", device!="lo"}[5m])) or
+            sum(max_over_time(rdsosmetrics_network_tx{node_name=~"$host"}[$interval])) or
+            sum(max_over_time(rdsosmetrics_network_tx{node_name=~"$host"}[5m]))',
+            interval='$interval',
+            intervalFactor=1,
+            legendFormat='Outbound',
+          )
+          ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 12,
+    "y": 159,
+    },
+  style=null,
+)//449 graph
+.addPanel(
+    row.new(
+      title='',
+    ),
+    gridPos={
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 166,
+    },
+    style=null,
+)//392 row
+.addPanel(
+  graphPanel.new(
+    'Network Utilization Hourly',//title
+    fill=1,
+    decimals=2,
+    linewidth=1,
+    bars=true,
+    lines=false,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_avg=true,
+    legend_max=true,
+    legend_min=true,
+    legend_show=true,
+    legend_values=true,
+    timeFrom='24h',
+    stack=true,
+    editable=true,
+    repeat='host',
+    maxPerRow=6,
+    formatY1='bytes',
+    minY1='0',
+    links=[
+        {
+          "dashUri": "db/system-overview",
+          "dashboard": "System Overview",
+          "includeVars": true,
+          "keepTime": true,
+          "targetBlank": true,
+          "title": "System Overview",
+          "type": "dashboard"
+        }
+      ],
+  )
+  .addTarget(
+      prometheus.target(
+        'sum(increase(node_network_receive_bytes_total{node_name=~"$host", device!="lo"}[1h]))',
+        interval='1h',
+        intervalFactor=1,
+        legendFormat='Received',
+      )
+      )
+  .addTarget(
+          prometheus.target(
+            'sum(increase(node_network_transmit_bytes_total{node_name=~"$host", device!="lo"}[1h]))',
+            interval='1h',
+            intervalFactor=1,
+            legendFormat='Sent',
+          )
+          ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 0,
+    "y": 167,
+    },
+  style=null,
+)//105 graph
+.addPanel(
+  graphPanel.new(
+    'Network Utilization Hourly',//title
+    fill=1,
+    decimals=2,
+    linewidth=1,
+    bars=true,
+    lines=false,
+    datasource='Prometheus',
+    pointradius=5,
+    paceLength=10,
+    legend_alignAsTable=true,
+    legend_avg=true,
+    legend_max=true,
+    legend_min=true,
+    legend_show=true,
+    legend_values=true,
+    timeFrom='24h',
+    stack=true,
+    editable=true,
+    repeatIteration=1553870190718,
+    repeatPanelId=105,
+    maxPerRow=6,
+    formatY1='bytes',
+    minY1='0',
+    links=[
+        {
+          "dashUri": "db/system-overview",
+          "dashboard": "System Overview",
+          "includeVars": true,
+          "keepTime": true,
+          "targetBlank": true,
+          "title": "System Overview",
+          "type": "dashboard"
+        }
+      ],
+  )
+  .addTarget(
+      prometheus.target(
+        'sum(increase(node_network_receive_bytes_total{node_name=~"$host", device!="lo"}[1h]))',
+        interval='1h',
+        intervalFactor=1,
+        legendFormat='Received',
+      )
+      )
+  .addTarget(
+          prometheus.target(
+            'sum(increase(node_network_transmit_bytes_total{node_name=~"$host", device!="lo"}[1h]))',
+            interval='1h',
+            intervalFactor=1,
+            legendFormat='Sent',
+          )
+          ),
+  gridPos={
+    "h": 7,
+    "w": 12,
+    "x": 12,
+    "y": 167,
+    },
+  style=null,
+)//450 graph

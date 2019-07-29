@@ -15,13 +15,13 @@ dashboard.new(
   'NUMA Overview',
   time_from='now-12h',
   editable=false,
-  refresh= "1m",
+  refresh= '1m',
   graphTooltip='shared_crosshair',
   schemaVersion=18,
   version=4,
   tags=['OS','Percona'],
   iteration=1560951716421,
-  uid="8gx8yeMik",
+  uid='8gx8yeMik',
   timepicker = timepicker.new(
     hidden = false,
     collapse= false,
@@ -1822,6 +1822,13 @@ dashboard.new(
            "y": 54,
        }
     )//51 graph
+    ,gridPos={
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 53
+            },
+    style=null,
 )//58 row
 .addPanel(
     row.new(

@@ -108,6 +108,7 @@
     links=[],
     steppedLine = false,
     timeFrom=null,
+    percentage=false,
   ):: {
     title: title,
     [if maxPerRow != null then 'maxPerRow']: maxPerRow,
@@ -150,7 +151,7 @@
     pointradius: pointradius,
     bars: bars,
     stack: stack,
-    percentage: false,
+    percentage: percentage,
     legend: {
       show: legend_show,
       values: legend_values,

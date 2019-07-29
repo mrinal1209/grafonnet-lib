@@ -982,7 +982,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     '$host - Interrupts',//title
-    fill=6,
+    fill=2,
     linewidth=2,
     decimals=2,
     datasource='Prometheus',
@@ -1056,7 +1056,7 @@ dashboard.new(
 .addPanel(
   graphPanel.new(
     '$host - Context Switches',//title
-    fill=6,
+    fill=2,
     linewidth=2,
     datasource='Prometheus',
     pointradius=5,

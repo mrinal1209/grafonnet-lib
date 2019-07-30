@@ -261,7 +261,7 @@ Read more about [Replica Set Member States](https://docs.mongodb.com/manual/refe
       step=300,
     )
   ),
-  gridPos = null,
+  gridPos = {},
   style=null,
 )//49 singlestat
 .addPanel(

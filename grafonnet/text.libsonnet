@@ -12,11 +12,13 @@
     editable=null,
     id=null,
     links=[],
+    maxPerRow=null,
   )::
     {
       [if transparent != null then 'transparent']: transparent,
       [if description != null then 'description']: description,
       [if datasource != null then 'datasource']: datasource,
+      [if maxPerRow != null then 'maxPerRow']: maxPerRow,
     //  [if error != null then 'error']: error,
       [if height != null then 'height']: height,
       [if id != null then 'id']: id,

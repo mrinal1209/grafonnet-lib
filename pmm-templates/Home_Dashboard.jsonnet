@@ -672,14 +672,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'sum by () (
-      (rate(mysql_global_status_queries{service_name=~"$service"}[$interval]) or
-      irate(mysql_global_status_queries{service_name=~"$service"}[5m])) or
-      (sum(rate(mongodb_mongod_op_counters_total{service_name=~"$service",type!="command"}[$interval])) or
-      sum(irate(mongodb_mongod_op_counters_total{service_name=~"$service",type!="command"}[5m]))) or
-      (sum(rate(pg_stat_database_xact_commit{service_name=~"$service"}[$interval]) + rate(pg_stat_database_xact_rollback{service_name=~"$service"}[$interval])) or
-      sum(irate(pg_stat_database_xact_commit{service_name=~"$service"}[5m]) + irate(pg_stat_database_xact_rollback{service_name=~"$service"}[5m])))
-      )',
+      'sum by () (\n(rate(mysql_global_status_queries{service_name=~\"$service\"}[$interval]) or \nirate(mysql_global_status_queries{service_name=~\"$service\"}[5m])) or \n(sum(rate(mongodb_mongod_op_counters_total{service_name=~\"$service\",type!=\"command\"}[$interval])) or \nsum(irate(mongodb_mongod_op_counters_total{service_name=~\"$service\",type!=\"command\"}[5m]))) or\n(sum(rate(pg_stat_database_xact_commit{service_name=~\"$service\"}[$interval]) + rate(pg_stat_database_xact_rollback{service_name=~\"$service\"}[$interval])) or\nsum(irate(pg_stat_database_xact_commit{service_name=~\"$service\"}[5m]) + irate(pg_stat_database_xact_rollback{service_name=~\"$service\"}[5m])))\n)',
       intervalFactor = 1,
       interval='$interval',
       calculatedInterval='10m',

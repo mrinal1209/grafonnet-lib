@@ -1205,14 +1205,7 @@ dashboard.new(
   )
   .addTarget(
     prometheus.target(
-      'sum by (node_name) (
-      (rate(mysql_global_status_queries{service_name=~"$service",node_name=~"$host"}[$interval]) or
-      irate(mysql_global_status_queries{service_name=~"$service",node_name=~"$host"}[5m])) or
-      (sum by (node_name) (rate(mongodb_mongod_op_counters_total{service_name=~"$service",node_name=~"$host",type!="command"}[$interval])) or
-      sum by (node_name) (irate(mongodb_mongod_op_counters_total{service_name=~"$service",node_name=~"$host",type!="command"}[5m]))) or
-      (sum by (node_name) (rate(pg_stat_database_xact_commit{service_name=~"$service",node_name=~"$host"}[$interval]) + rate(pg_stat_database_xact_rollback{service_name=~"$service",node_name=~"$host"}[$interval])) or
-      sum by (node_name) (irate(pg_stat_database_xact_commit{service_name=~"$service",node_name=~"$host"}[5m]) + irate(pg_stat_database_xact_rollback{service_name=~"$service",node_name=~"$host"}[5m])))
-      ',
+      'sum by (node_name) (\n(rate(mysql_global_status_queries{service_name=~\"$service\",node_name=~\"$host\"}[$interval]) or \nirate(mysql_global_status_queries{service_name=~\"$service\",node_name=~\"$host\"}[5m])) or \n(sum by (node_name) (rate(mongodb_mongod_op_counters_total{service_name=~\"$service\",node_name=~\"$host\",type!=\"command\"}[$interval])) or \nsum by (node_name) (irate(mongodb_mongod_op_counters_total{service_name=~\"$service\",node_name=~\"$host\",type!=\"command\"}[5m]))) or\n(sum by (node_name) (rate(pg_stat_database_xact_commit{service_name=~\"$service\",node_name=~\"$host\"}[$interval]) + rate(pg_stat_database_xact_rollback{service_name=~\"$service\",node_name=~\"$host\"}[$interval])) or\nsum by (node_name) (irate(pg_stat_database_xact_commit{service_name=~\"$service\",node_name=~\"$host\"}[5m]) + irate(pg_stat_database_xact_rollback{service_name=~\"$service\",node_name=~\"$host\"}[5m])))\n)',
       intervalFactor = 1,
       interval='$interval',
       calculatedInterval='10m',

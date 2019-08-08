@@ -29,11 +29,17 @@
     scroll=null,
     showHeader=null,
     sort=null,
+    timeFrom=null,
+    transform='table',
+    height=null,
+    hideTimeOverride=null,
   ):: {
     type: 'table',
     title: title,
     [if span != null then 'span']: span,
     [if min_span != null then 'minSpan']: min_span,
+    [if height != null then 'height']: height,
+    [if hideTimeOverride != null then 'hideTimeOverride']: hideTimeOverride,
     datasource: datasource,
     targets: [
     ],
@@ -44,6 +50,7 @@
     [if maxPerRow != null then 'maxPerRow']: maxPerRow,
     [if repeat != null then 'repeat']: repeat,
     [if pageSize != null then 'pageSize']: pageSize,
+    [if timeFrom != null then 'timeFrom']: timeFrom,
     [if repeatDirection != null then 'repeatDirection']: repeatDirection,
     [if repeatIteration != null then 'repeatIteration']: repeatIteration,
     [if repeatPanelId != null then 'repeatPanelId']: repeatPanelId,
@@ -51,7 +58,7 @@
     [if scroll != null then 'scroll']: scroll,
     [if showHeader != null then 'showHeader']: showHeader,
     [if sort != null then 'sort']: sort,
-    transform: 'table',
+    transform: transform,
     _nextTarget:: 0,
     addTarget(target):: self {
       // automatically ref id in added targets.

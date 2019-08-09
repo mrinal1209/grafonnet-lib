@@ -2270,6 +2270,7 @@ dashboard.new(
           prometheus.target(
             'topk(10, count({__name__=~".+"})  by (__name__))',
             intervalFactor = 2,
+            legendFormat="{{ __name__ }}",
             interval='5m',
             step=600,
          )
@@ -2595,6 +2596,7 @@ dashboard.new(
     .addPanel(
       singlestat.new(
         'Sys Uptime',//title
+        colorPostfix=true,
         format='s',
         editable=true,
         decimals=1,

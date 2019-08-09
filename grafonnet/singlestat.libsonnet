@@ -58,9 +58,11 @@
     timeFrom=null,
     tableColumn='',
     hideTimeOverride=null,
+    colorPostfix=false,
   )::
     {
       [if timeFrom != null then 'timeFrom']: timeFrom,
+      [if colorPostfix != null then 'colorPostfix']: colorPostfix,
       [if hideTimeOverride != null then 'hideTimeOverride']: hideTimeOverride,
       tableColumn: tableColumn,
       [if height != null then 'height']: height,

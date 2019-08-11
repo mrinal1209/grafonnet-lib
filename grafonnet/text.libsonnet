@@ -29,5 +29,13 @@
       mode: mode,
       content: content,
       links:links,
+      targets: [
+      ],
+      _nextTarget:: 0,
+      addTarget(target):: self {
+        local nextTarget = super._nextTarget,
+        _nextTarget: nextTarget + 1,
+        targets+: [target { refId: std.char(std.codepoint('A') + nextTarget) }],
+      },
     },
 }

@@ -5,12 +5,16 @@
     id=null,
     height = null,
     datasource=null,
+    transparent=null,
+    isRootDashboard=null,
   )::
     {
       title: title,
       type: type,
       datasource: datasource,
       [if height != null then 'height']: height,
+      [if transparent != null then 'transparent']: transparent,
+      [if isRootDashboard != null then 'isRootDashboard']: isRootDashboard,
       id: id,
       targets: [
       ],

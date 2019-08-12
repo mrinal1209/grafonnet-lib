@@ -1855,6 +1855,16 @@ dashboard.new(
             legendFormat='Free Memory',
             calculatedInterval='2m',
           )
+      )
+      .addTarget(
+          prometheus.target(
+            'max_over_time(mysql_global_variables_query_cache_size{service_name=\"$service\"}[$interval]) or\nmax_over_time(mysql_global_variables_query_cache_size{service_name=\"$service\"}[5m])',
+            interval='$interval',
+            step=20,
+            intervalFactor=1,
+            legendFormat='Query Cache Size',
+            calculatedInterval='2m',
+          )
       ),
       gridPos={
         "h": 7,

@@ -471,7 +471,7 @@ dashboard.new(
 )//37 graph
 .addPanel(
     row.new(
-      title='MySQL Exporter',
+      title='MySQL Exporter $service',
       collapse=true,
     )
     .addPanel(
@@ -524,6 +524,7 @@ dashboard.new(
             "rgba(237, 129, 40, 0.89)",
             "#d44a3a"
         ],
+        sparklineShow=true,
         interval=null,
         height='125px',
         prefixFontSize='80%',
@@ -559,6 +560,7 @@ dashboard.new(
             "#d44a3a"
         ],
         interval=null,
+        sparklineShow=true,
         height='125px',
         prefixFontSize='80%',
         valueMaps=[],
@@ -594,6 +596,7 @@ dashboard.new(
           "#299c46"
         ],
         interval=null,
+        sparklineShow=true,
         height='125px',
         prefixFontSize='80%',
         postfixFontSize='80%',

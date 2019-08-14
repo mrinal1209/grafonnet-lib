@@ -110,9 +110,11 @@
     steppedLine = false,
     timeFrom=null,
     percentage=false,
+    titleSize=null,
   ):: {
     title: title,
     [if maxPerRow != null then 'maxPerRow']: maxPerRow,
+    [if titleSize != null then 'titleSize']: titleSize,
     [if span != null then 'span']: span,
     [if repeatIteration != null then 'repeatIteration']: repeatIteration,
     [if repeatPanelId != null then 'repeatPanelId']: repeatPanelId,

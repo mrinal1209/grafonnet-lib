@@ -660,7 +660,7 @@ dashboard.new(
             interval='$interval',
             step=300,
             intervalFactor=1,
-            legendFormat='Time to Use Redo Log Space',
+            legendFormat='Time to Use Redo Log Space ',
             calculatedInterval='2m',
           )
       )
